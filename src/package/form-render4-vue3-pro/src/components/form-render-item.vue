@@ -7,9 +7,7 @@
     <div v-if="isFormItem">
       <a-row :span="24">
         <a-col :span="24 / column" v-for="child in children" :key="child.field">
-          <form-render-item
-            :schema="child"
-          ></form-render-item>
+          <form-render-item :schema="child"></form-render-item>
         </a-col>
       </a-row>
     </div>
@@ -23,13 +21,13 @@
 </template>
 
 <script setup>
-import { defineAsyncComponent, computed } from 'vue'
+import { defineAsyncComponent, computed, reactive } from 'vue'
 
 const props = defineProps({
   schema: Object,
 })
 
-const { schema } = props
+const schema = reactive(props.schema)
 const isFormItem = computed(() => schema.type === 'form-item')
 
 const column = isFormItem.value && schema.children.column
