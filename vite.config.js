@@ -14,7 +14,7 @@ export default defineConfig({
       fileName: (format) => `index.${format}.js`
     },
     rollupOptions: {
-      external: ['vue'],
+      external: ['vue', '@arco-design/web-vue'],
       output: {
         globals: {
           vue: 'Vue',
