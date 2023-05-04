@@ -68,6 +68,8 @@ const getLabel = (option) => {
     const lablKey = optionData[schema.field].label
     if (lablKey) {
       return option[lablKey]
+    } else if (option.label) {
+      return option.label
     } else {
       throw new Error(
         '[Form-Render4-Vue3-Pro]: You must provide a `label` property to get label.'
@@ -91,6 +93,8 @@ const getValue = (option) => {
     const valueKey = optionData[schema.field].value
     if (valueKey) {
       return option[valueKey]
+    } else if (option.value) {
+      return option.value
     } else {
       throw new Error(
         '[Form-Render4-Vue3-Pro]: You must provide a `value` property to get value.'
