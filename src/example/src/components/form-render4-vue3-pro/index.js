@@ -1,9 +1,9 @@
-import VueFormRender from './src/form-render4-vue3-pro.vue'
+import FormRender4Vue3 from './src/form-render4-vue3-pro.vue'
 
-VueFormRender.install = function (app) {
-  app.component('form-render4-vue3-pro', VueFormRender)
+FormRender4Vue3.install = function (app) {
+  app.component('form-render4-vue3-pro', FormRender4Vue3)
 }
 
-VueFormRender.version = 'v1.0.0'
-export default VueFormRender
+FormRender4Vue3.version = 'v1.0.0'
+export default FormRender4Vue3
 

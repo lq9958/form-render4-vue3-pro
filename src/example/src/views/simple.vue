@@ -1,7 +1,7 @@
 <template>
   <div class="simple-form">
     <div class="form-container">
-      <form-render4-vue3
+      <form-render4-vue3-pro
         v-if="showForm"
         ref="formRenderInstance"
         v-model="formData"
@@ -14,7 +14,7 @@
             <a-button @click="resetFormData">重置</a-button>
           </a-space>
         </template>
-      </form-render4-vue3>
+      </form-render4-vue3-pro>
       <a-link v-else status="danger">json 格式不正确~</a-link>
       <a-divider />
       <a-space align="center">
@@ -42,7 +42,6 @@ import { Codemirror } from 'vue-codemirror'
 import { json } from '@codemirror/lang-json'
 import { oneDark } from '@codemirror/theme-one-dark'
 import { SIMPLEFORM, SIMPLEFORMDATA } from '@/data/form-schema'
-import FormRender4Vue3 from '@/components/form-render4-vue3-pro/src/form-render4-vue3-pro.vue'
 import useApp from '@/hooks/useApp'
 
 const { context } = useApp()
@@ -99,15 +98,13 @@ const optionData = reactive({
     ],
     key: 'value',
     value: 'value',
-    label: 'label'
+    label: 'label',
   },
 })
 
 const resetFormData = () => {
   formRenderInstance.value && formRenderInstance.value.reset()
 }
-
-
 </script>
 
 <style lang="scss">

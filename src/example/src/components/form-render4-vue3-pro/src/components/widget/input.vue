@@ -10,18 +10,18 @@
 </template>
 
 <script setup>
-import { h ,inject} from "vue";
+import { inject, reactive } from 'vue'
 
-const formData = inject("form-render-data");
+const formData = inject('form-render-data')
 const props = defineProps({
   schema: Object,
-});
+})
 
-const { schema } = props;
+const schema = reactive(props.schema)
 // 仅支持文本和arco-design自带图标的前后缀
 /**
  * slot {
- *   prefix:{ 
+ *   prefix:{
  *      type: 'text | icon'，
  *      content: 'text | icon-name'
  * },
@@ -30,22 +30,21 @@ const { schema } = props;
  *      content: 'text | icon-name'},
  * }
  */
-const slot = schema.slot
-const filedName = schema.field;
-const attrs = schema.props || {};
+// const slot = schema.slot
+const filedName = schema.field
+const attrs = schema.props || {}
 
-
-const renderExtra = (type,content) => {
-  if(type==='text') {
-    return h('span',content)
-  }else if(type==='icon') {
-    return h(`icon-${content}`)
-  }
-}
+// const renderExtra = (type, content) => {
+//   if (type === 'text') {
+//     return h('span', content)
+//   } else if (type === 'icon') {
+//     return h(`icon-${content}`)
+//   }
+// }
 </script>
 
 <script>
 export default {
-  name: "FormRenderInput",
-};
+  name: 'FormRenderInput',
+}
 </script>

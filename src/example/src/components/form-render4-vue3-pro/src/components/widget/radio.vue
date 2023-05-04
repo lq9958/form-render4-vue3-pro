@@ -2,16 +2,16 @@
   <a-radio-group v-model="formData[filedName]" v-bind="attrs">
     <a-radio
       v-for="item in options"
+      :key="getKey(item)"
       :value="getValue(item)"
       :label="getLabel(item)"
-      :key="getKey(item)"
       >{{ getLabel(item) }}</a-radio
     >
   </a-radio-group>
 </template>
 
 <script setup>
-import { inject, ref, onMounted, computed } from 'vue'
+import { inject, ref, onMounted, computed, reactive } from 'vue'
 
 const formData = inject('form-render-data')
 const optionData = inject('form-render-option-data')
@@ -19,7 +19,7 @@ const props = defineProps({
   schema: Object,
 })
 
-const { schema } = props
+const schema = reactive(props.schema)
 const filedName = ref(schema.field)
 
 const options = ref(null)
@@ -128,6 +128,6 @@ const attrs = schema.props || {}
 
 <script>
 export default {
-  name: "FormRenderRadio",
-};
+  name: 'FormRenderRadio',
+}
 </script>

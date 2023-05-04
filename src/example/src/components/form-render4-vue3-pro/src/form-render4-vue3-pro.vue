@@ -1,21 +1,23 @@
 <template>
   <div class="form-render">
     <a-form ref="formInstance" :model="formData" v-bind="formProps">
-      <form-render-item
-        v-for="filed in fields"
-        :schema="filed"
-        :form-data="formData"
-        :key="filed.field"
-      ></form-render-item>
-      <a-form-item no-style>
-        <slot name="footer"></slot>
-      </a-form-item>
+      <a-col v-for="filed in fields" :key="filed.field" :span="24 / column">
+        <form-render-item
+          :schema="filed"
+          :form-data="formData"
+        ></form-render-item>
+      </a-col>
+      <a-col :span="24 / column">
+        <a-form-item no-style>
+          <slot name="footer"></slot>
+        </a-form-item>
+      </a-col>
     </a-form>
   </div>
 </template>
 
 <script setup>
-import { watch, ref, provide, reactive, nextTick } from 'vue'
+import { watch, ref, provide, reactive } from 'vue'
 import FormRenderItem from './components/form-render-item.vue'
 
 const props = defineProps({
@@ -24,7 +26,7 @@ const props = defineProps({
   optionData: Object,
 })
 
-const formData = props.modelValue
+const formData = reactive(props.modelValue)
 provide('form-render-data', formData)
 provide('form-render-option-data', props.optionData || {})
 const emit = defineEmits(['update:modelValue'])
@@ -32,6 +34,7 @@ const emit = defineEmits(['update:modelValue'])
 const schema = reactive(props.schema)
 const fields = ref(schema.fields)
 const formProps = ref(schema.props)
+const column = ref(schema.column)
 watch(
   () => props.schema,
   (newVal) => {
@@ -71,7 +74,7 @@ defineExpose({
 
 <script>
 export default {
-  name: 'FormRender',
+  name: 'FormRender4Vue3Pro',
 }
 </script>
 
