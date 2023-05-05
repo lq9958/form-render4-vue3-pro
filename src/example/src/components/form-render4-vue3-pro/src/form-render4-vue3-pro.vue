@@ -1,7 +1,11 @@
 <template>
   <div class="form-render">
     <a-form ref="formInstance" :model="formData" v-bind="formProps">
-      <a-col v-for="filed in fields" :key="filed.field" :span="24 / column">
+      <a-col
+        v-for="filed in fields"
+        :key="filed.field"
+        :span="computedSpan(filed)"
+      >
         <form-render-item
           :schema="filed"
           :form-data="formData"
@@ -17,7 +21,7 @@
 </template>
 
 <script setup>
-import { watch, ref, provide, reactive } from 'vue'
+import { watch, ref, provide, reactive, computed } from 'vue'
 import FormRenderItem from './components/form-render-item.vue'
 
 const props = defineProps({
@@ -60,6 +64,11 @@ const validate = () => {
       })
     }
   })
+}
+
+const computedSpan = (schema) => {
+  if (schema.column) return 24 / schema.column
+  return 24 / column.value
 }
 
 const reset = () => {

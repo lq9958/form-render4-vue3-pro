@@ -98,7 +98,7 @@ const optionData = reactive({
     ],
     key: 'value',
     value: 'value',
-    label: 'label',
+    // label: 'label',
   },
 })
 
