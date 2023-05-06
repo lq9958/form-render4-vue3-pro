@@ -14,7 +14,6 @@
     <component
       :is="renderComponent"
       v-else
-      v-model="formData[schema.field]"
       :schema="schema"
       v-bind="schema.props"
     />
