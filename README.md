@@ -6,12 +6,18 @@
 
 ## 新增特性
 
+2023-5-6
+
+- ✅ 新增自定义表单选项组件
+
+---
+
 - ✅ 支持 form-item 中的嵌套
 - ✅ 数据项和 schema 分离
 
-
 ## 数据项说明
-组件的item项目前的优先级为 optionData > schema.data 组件会优先在optionData中查找该字段的数据源。如果未提供，组件将尝试在schema的data字段中获取数据源，如果均为提供组件将会抛出异常。
+
+组件的 item 项目前的优先级为 optionData > schema.data 组件会优先在 optionData 中查找该字段的数据源。如果未提供，组件将尝试在 schema 的 data 字段中获取数据源，如果均为提供组件将会抛出异常。
 
 ## 如何使用
 
