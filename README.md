@@ -1,4 +1,4 @@
-<p align="center"><a href="https://github.com/lq9958/form-render4-vue3-pro" target="_blank" rel="noopener noreferrer"><img width="150" src="https://github.com/lq9958/form-render4-vue3-pro/blob/main/src/assets/logo.png?raw=true" alt="form-render4-vue3-pro logo"></a></p>
+<p align="center"><a href="https://github.com/lq9958/form-render4-vue3-pro" target="_blank" rel="noopener noreferrer"><img width="150" src="https://s1.ax1x.com/2023/05/06/p9a7EZ9.png" alt="form-render4-vue3-pro logo"></a></p>
 
 <h1 align="center">Form-Render4-Vue3-Pro</h1>
 
