@@ -3,20 +3,20 @@
 </template>
 
 <script setup>
-import { inject, reactive } from 'vue'
+  import { inject, reactive, ref } from 'vue';
 
-const formData = inject('form-render-data')
-const props = defineProps({
-  schema: Object,
-})
+  const formData = inject('form-render-data');
+  const props = defineProps({
+    schema: Object,
+  });
 
-const schema = reactive(props.schema)
-const filedName = props.schema.field
-const attrs = schema.props || {}
+  const schema = reactive(props.schema);
+  const filedName = ref(props.schema.field);
+  const attrs = schema.props || {};
 </script>
 
 <script>
-export default {
-  name: 'FormRenderSlider',
-}
+  export default {
+    name: 'FormRenderSlider',
+  };
 </script>

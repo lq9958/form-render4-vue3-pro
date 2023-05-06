@@ -6,14 +6,15 @@
   >
     <div v-if="isFormItem">
       <a-row :span="24">
-        <a-col :span="24 / column" v-for="child in children" :key="child.field">
+        <a-col v-for="child in children" :key="child.field" :span="24 / column">
           <form-render-item :schema="child"></form-render-item>
         </a-col>
       </a-row>
     </div>
     <component
-      v-else
       :is="renderComponent"
+      v-else
+      v-model="formData[schema.field]"
       :schema="schema"
       v-bind="schema.props"
     />
@@ -21,26 +22,27 @@
 </template>
 
 <script setup>
-import { defineAsyncComponent, computed, reactive } from 'vue'
+  import { defineAsyncComponent, computed, reactive, ref, inject } from 'vue';
 
-const props = defineProps({
-  schema: Object,
-})
+  const formData = inject('form-render-data');
+  const props = defineProps({
+    schema: Object,
+  });
 
-const schema = reactive(props.schema)
-const isFormItem = computed(() => schema.type === 'form-item')
+  const schema = reactive(props.schema);
+  const isFormItem = computed(() => schema.type === 'form-item');
 
-const column = isFormItem.value && schema.children.column
-const children = isFormItem.value ? schema.children.items : []
+  const column = isFormItem.value && schema.children.column;
+  const children = isFormItem.value ? schema.children.items : [];
 
-const type = schema.type
-const renderComponent = defineAsyncComponent(() =>
-  import(`./widget/${type}.vue`)
-)
+  const type = ref(schema.type);
+  const renderComponent = defineAsyncComponent(() =>
+    import(`./widget/${type.value}.vue`)
+  );
 </script>
 
 <script>
-export default {
-  name: 'FormRenderItem',
-}
+  export default {
+    name: 'FormRenderItem',
+  };
 </script>
