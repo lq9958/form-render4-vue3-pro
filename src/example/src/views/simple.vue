@@ -8,6 +8,12 @@
         :schema="formSchema"
         :option-data="optionData"
       >
+        <template #slot>
+          <a-image
+            width="200"
+            src="https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/a8c8cdb109cb051163646151a4a5083b.png~tplv-uwbnlip3yd-webp.webp"
+          />
+        </template>
         <template #footer>
           <a-space>
             <a-button type="primary" @click="validateForm">校验</a-button>

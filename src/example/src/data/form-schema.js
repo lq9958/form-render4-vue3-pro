@@ -3,22 +3,13 @@ export const SIMPLEFORM = {
   props: {
     layout: "horizontal",
     labelAlign: "left",
+    autoLabelWidth: true
   },
   fields: [{
     type: "input",
     field: "name",
     title: "姓名",
     value: "QQ",
-    slot: {
-      prefix: {
-        type: 'text',
-        content: '+86'
-      },
-      suffix: {
-        type: 'icon',
-        content: 'user'
-      }
-    },
     props: {
       rules: [{
         required: true,
@@ -260,6 +251,10 @@ export const SIMPLEFORM = {
       }]
     },
   },
+  {
+    field:'slot',
+    title:'自定义表单项',
+  }
   ],
 }
 

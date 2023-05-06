@@ -16,7 +16,7 @@
     "@element-plus/icons-vue": "^2.1.0",
     "codemirror": "^6.0.1",
     "form-render4-vue3": "^0.0.3",
-    "form-render4-vue3-pro": "^1.0.1",
+    "form-render4-vue3-pro": "^1.1.0",
     "normalize.css": "^8.0.1",
     "vue": "^3.2.47",
     "vue-codemirror": "^6.1.1"
