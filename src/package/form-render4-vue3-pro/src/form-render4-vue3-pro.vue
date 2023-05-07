@@ -26,12 +26,10 @@
 </template>
 
 <script setup>
-  import { watch, ref, provide, reactive, getCurrentInstance } from 'vue';
+  import { watch, ref, provide, reactive, useSlots } from 'vue';
   import FormRenderItem from './components/form-render-item.vue';
 
-  const instance = getCurrentInstance();
-  const slots = instance.ctx.$slots;
-
+  const slots = useSlots();
   const props = defineProps({
     modelValue: { type: Object },
     schema: { type: Object },
@@ -84,6 +82,7 @@
   };
 
   const haveSolt = (schema) => {
+    if(!slots) return false
     return schema.field in slots;
   };
 
