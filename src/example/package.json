@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",
+    "process": "^0.11.10",
     "vite": "^4.2.0"
   },
   "homepage": "https://github.com/lq9958/form-render4-vue3-pro",

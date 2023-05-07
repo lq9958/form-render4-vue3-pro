@@ -23,7 +23,6 @@
 <script setup>
   import { defineAsyncComponent, computed, reactive, ref, inject } from 'vue';
 
-  const formData = inject('form-render-data');
   const props = defineProps({
     schema: Object,
   });
@@ -35,6 +34,7 @@
   const children = isFormItem.value ? schema.children.items : [];
 
   const type = ref(schema.type);
+  console.log('current',schema)
   const renderComponent = defineAsyncComponent(() =>
     import(`./widget/${type.value}.vue`)
   );
