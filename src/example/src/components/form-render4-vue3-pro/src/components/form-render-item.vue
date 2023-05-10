@@ -6,7 +6,7 @@
   >
     <div v-if="isFormItem">
       <a-row :span="24">
-        <a-col v-for="child in children" :key="child.field" :span="24 / column">
+        <a-col v-for="child in children" :key="child.field" :span="span">
           <form-render-item :schema="child"></form-render-item>
         </a-col>
       </a-row>
@@ -30,7 +30,17 @@
   const schema = reactive(props.schema);
   const isFormItem = computed(() => schema.type === 'form-item');
 
-  const column = isFormItem.value && schema.children.column;
+  // v1.2.0 form-tiem配置新增span项，原本column不变
+  const computedSpan = () => {
+    if (isFormItem.value) {
+      if (schema.children.span) {
+        return schema.children.span;
+      }
+      return 24;
+    }
+    return 24;
+  }
+  const span = computedSpan();
   const children = isFormItem.value ? schema.children.items : [];
 
   const type = ref(schema.type);

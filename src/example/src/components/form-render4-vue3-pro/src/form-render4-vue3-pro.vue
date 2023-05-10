@@ -32,7 +32,6 @@
 import { watch, ref, provide, reactive, useSlots } from 'vue'
 import FormRenderItem from './components/form-render-item.vue'
 
-
 const slots = useSlots()
 
 const props = defineProps({
@@ -52,7 +51,7 @@ const emit = defineEmits(['update:modelValue'])
 const schema = reactive(props.schema)
 const fields = ref(schema.fields)
 const formProps = ref(schema.props)
-const column = ref(schema.column)
+const column = ref(schema.column || 1)
 watch(
   () => props.schema,
   (newVal) => {
@@ -87,7 +86,7 @@ const reset = (fieldlist) => {
 }
 
 const haveSolt = (schema) => {
-  console.log('-----',slots)
+  console.log('-----', slots)
   if (!slots) return false
   return schema.field in slots
 }
