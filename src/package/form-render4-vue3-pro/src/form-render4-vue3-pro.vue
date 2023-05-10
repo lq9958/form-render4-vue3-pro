@@ -47,7 +47,8 @@
   const schema = reactive(props.schema);
   const fields = ref(schema.fields);
   const formProps = ref(schema.props);
-  const column = ref(schema.column);
+  // fix: 修复schema无clomun属性时无法渲染表单的问题
+  const column = ref(schema.column || 1);
   watch(
     () => props.schema,
     (newVal) => {

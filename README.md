@@ -6,7 +6,11 @@
 
 [在线演示](https://lq9958.github.io/)
 
-## 新增特性
+## 💎更新日志
+2023-5-10 v1.2.0
+- 🍬 使用span代替form-item schema中column字段
+- 🐛 修复schema中无column字段时无法渲染表单的问题
+- 🐛 修复input组件显示异常的问题
 
 2023-5-6
 
@@ -21,7 +25,7 @@
 
 组件的 item 项目前的优先级为 optionData > schema.data 组件会优先在 optionData 中查找该字段的数据源。如果未提供，组件将尝试在 schema 的 data 字段中获取数据源，如果均为提供组件将会抛出异常。
 
-## 如何使用
+## 🌈如何使用
 
 ### 安装
 
