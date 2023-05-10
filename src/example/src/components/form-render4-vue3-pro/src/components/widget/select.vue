@@ -10,7 +10,7 @@
 </template>
 
 <script setup>
-  import { inject, ref, onMounted, computed, reactive, wacth } from 'vue';
+  import { inject, ref, onMounted, computed, reactive, watch } from 'vue';
 
   const formData = inject('form-render-data');
   const optionData = inject('form-render-option-data');
