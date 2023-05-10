@@ -6,18 +6,15 @@
         :key="field.field"
         :span="computedSpan(field)"
       >
-        <template v-if="haveSolt(field)">
-          <a-form-item
-            :field="field.field"
-            :label="field.title"
-            v-bind="field.props"
-          >
-            <slot :name="field.field" :data="formData"> </slot>
-          </a-form-item>
-        </template>
-        <template v-else>
-          <form-render-item :schema="field" :form-data="formData" />
-        </template>
+        <a-form-item
+          v-if="haveSolt(field)"
+          :field="field.field"
+          :label="field.title"
+          v-bind="field.props"
+        >
+          <slot :name="field.field" :data="formData"> </slot>
+        </a-form-item>
+        <form-render-item v-else :schema="field" :form-data="formData" />
       </a-col>
       <a-col :span="24 / column">
         <a-form-item no-style>
@@ -29,82 +26,81 @@
 </template>
 
 <script setup>
-import { watch, ref, provide, reactive, useSlots } from 'vue'
-import FormRenderItem from './components/form-render-item.vue'
+  import { watch, ref, provide, reactive, useSlots } from 'vue';
+  import FormRenderItem from './components/form-render-item.vue';
 
-const slots = useSlots()
+  const slots = useSlots();
+  const props = defineProps({
+    modelValue: { type: Object },
+    schema: { type: Object },
+    optionData: { type: Object },
+  });
 
-const props = defineProps({
-  modelValue: { type: Object },
-  schema: { type: Object },
-  optionData: { type: Object },
-})
+  const formData = reactive(props.modelValue);
+  watch(formData, (val) => {
+    emit('update:modelValue', val);
+  });
+  provide('form-render-data', formData);
+  provide('form-render-option-data', props.optionData || {});
+  const emit = defineEmits(['update:modelValue']);
 
-const formData = reactive(props.modelValue)
-watch(formData, (val) => {
-  emit('update:modelValue', val)
-})
-provide('form-render-data', formData)
-provide('form-render-option-data', props.optionData || {})
-const emit = defineEmits(['update:modelValue'])
-
-const schema = reactive(props.schema)
-const fields = ref(schema.fields)
-const formProps = ref(schema.props)
-const column = ref(schema.column || 1)
-watch(
-  () => props.schema,
-  (newVal) => {
-    fields.value = newVal.fields
-    formProps.value = newVal.props
-  }
-)
-
-const formInstance = ref(null)
-const validate = () => {
-  return new Promise((resolve, reject) => {
-    if (formInstance.value) {
-      formInstance.value.validate((err) => {
-        if (!err) {
-          resolve(true)
-        } else {
-          reject(err)
-        }
-      })
+  const schema = reactive(props.schema);
+  const fields = ref(schema.fields);
+  const formProps = ref(schema.props);
+  // fix: 修复schema无clomun属性时无法渲染表单的问题
+  const column = ref(schema.column || 1);
+  watch(
+    () => props.schema,
+    (newVal) => {
+      fields.value = newVal.fields;
+      formProps.value = newVal.props;
     }
-  })
-}
+  );
 
-const computedSpan = (schema) => {
-  if (schema.column) return 24 / schema.column
-  return 24 / column.value
-}
+  const formInstance = ref(null);
+  const validate = () => {
+    return new Promise((resolve, reject) => {
+      if (formInstance.value) {
+        formInstance.value.validate((err) => {
+          if (!err) {
+            resolve(true);
+          } else {
+            reject(err);
+          }
+        });
+      }
+    });
+  };
 
-const reset = (fieldlist) => {
-  // eslint-disable-next-line no-unused-expressions
-  formInstance.value && formInstance.value.resetFields(fieldlist)
-}
+  const computedSpan = (schema) => {
+    if (schema.column) return 24 / schema.column;
+    return 24 / column.value;
+  };
 
-const haveSolt = (schema) => {
-  console.log('-----', slots)
-  if (!slots) return false
-  return schema.field in slots
-}
+  const reset = (fieldlist) => {
+    // eslint-disable-next-line no-unused-expressions
+    formInstance.value && formInstance.value.resetFields(fieldlist);
+  };
 
-defineExpose({
-  validate,
-  reset,
-})
+  const haveSolt = (schema) => {
+    if(!slots) return false
+    return schema.field in slots;
+  };
+
+  defineExpose({
+    validate,
+    reset,
+  });
 </script>
 
 <script>
-export default {
-  name: 'FormRender4Vue3Pro',
-}
+  export default {
+    name: 'FormRender4Vue3Pro',
+  };
 </script>
 
 <style scoped>
-.form-render {
-  width: 100%;
-}
+  .form-render {
+    width: 100%;
+  }
 </style>

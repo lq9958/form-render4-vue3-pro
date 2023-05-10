@@ -23,13 +23,13 @@
 <script setup>
   import { defineAsyncComponent, computed, reactive, ref, inject } from 'vue';
 
+  const formData = inject('form-render-data');
   const props = defineProps({
     schema: Object,
   });
 
   const schema = reactive(props.schema);
   const isFormItem = computed(() => schema.type === 'form-item');
-
   // v1.2.0 form-tiem配置新增span项，原本column不变
   const computedSpan = () => {
     if (isFormItem.value) {
@@ -40,11 +40,10 @@
     }
     return 24;
   }
-  const span = computedSpan();
+  const column = computedSpan();
   const children = isFormItem.value ? schema.children.items : [];
 
   const type = ref(schema.type);
-  console.log('current',schema)
   const renderComponent = defineAsyncComponent(() =>
     import(`./widget/${type.value}.vue`)
   );

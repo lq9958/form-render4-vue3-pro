@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-  import { inject, ref, onMounted, computed, reactive } from 'vue';
+  import { inject, ref, onMounted, computed, reactive, wacth, watch } from 'vue';
 
   const formData = inject('form-render-data');
   const optionData = inject('form-render-option-data');
@@ -47,6 +47,10 @@
   onMounted(() => {
     getOptions();
   });
+  
+  watch(optionData,() => {
+    getOptions()
+  })
 
   // 组件首先尝试使用额外的数据源中提供的label、value和key来获取值
   // 如果未提供，会尝试在schema中查找 data字段中的label、value和key的值
