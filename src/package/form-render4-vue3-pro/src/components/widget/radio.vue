@@ -31,7 +31,7 @@
     if (!haveExtraData.value) {
       if (!schema.data) {
         throw new Error(
-          '[Form-Render4-Vue3-Pro]: select component must provide a option list.'
+        `[Form-Render4-Vue3-Pro]: Field '${schema.field}' must provide a 'list' property in Radio.`
         );
       } else {
         options.value = schema.data.list;
@@ -40,7 +40,7 @@
       options.value = optionData[schema.field].list;
     } else {
       throw new Error(
-        '[Form-Render4-Vue3-Pro]: select component must provide a option list.'
+        `[Form-Render4-Vue3-Pro]: Field '${schema.field}' must provide a 'list' property in Radio.`
       );
     }
   };
@@ -62,7 +62,7 @@
       }
       if (option.label) return option.label;
       throw new Error(
-        '[Form-Render4-Vue3-Pro]: You must provide a `label` property to get label.'
+        `[Form-Render4-Vue3-Pro]: You must provide a 'label' property to get label in field: ${schema.field}.`
       );
     } else {
       const lablKey = optionData[schema.field].label;
@@ -73,7 +73,7 @@
         return option.label;
       }
       throw new Error(
-        '[Form-Render4-Vue3-Pro]: You must provide a `label` property to get label.'
+        `[Form-Render4-Vue3-Pro]: You must provide a 'label' property to get label in field: ${schema.field}.`
       );
     }
   };
@@ -85,7 +85,7 @@
       }
       if (option.value) return option.value;
       throw new Error(
-        '[Form-Render4-Vue3-Pro]: You must provide a `value` property to get value.'
+        `[Form-Render4-Vue3-Pro]: You must provide a 'value' property to get value in field: ${schema.field}.`
       );
     } else {
       const valueKey = optionData[schema.field].value;
@@ -96,7 +96,7 @@
         return option.value;
       }
       throw new Error(
-        '[Form-Render4-Vue3-Pro]: You must provide a `value` property to get value.'
+        `[Form-Render4-Vue3-Pro]: You must provide a 'value' property to get value in field: ${schema.field}.`
       );
     }
   };
@@ -108,14 +108,14 @@
       }
       if (option.id) return 'id';
       throw new Error(
-        '[Form-Render4-Vue3-Pro]: You must provide a `key` property to get value.'
+        `[Form-Render4-Vue3-Pro]: You must provide a 'key' property to get value in field: ${schema.field}.`
       );
     } else if (optionData[schema.field].key) {
       return optionData[schema.field].key;
     } else if (option.id) return 'id';
     else
       throw new Error(
-        '[Form-Render4-Vue3-Pro]: You must provide a `key` property to get value.'
+        `[Form-Render4-Vue3-Pro]: You must provide a 'key' property to get value in field: ${schema.field}.`
       );
   };
 
