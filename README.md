@@ -6,7 +6,7 @@
 
 [在线演示](https://lq9958.github.io/)
 
-## 💎更新日志
+## [💎更新日志](./CHANGELOG.MD)
 2023-5-10 v1.2.0
 - 🍬 使用span代替form-item schema中column字段
 - 🐛 修复schema中无column字段时无法渲染表单的问题
@@ -263,6 +263,7 @@ const schema = reactive({
 | props    | Object | 生成最终组件的 props 项，对应 arco-design 组件的 props                     | No       |
 | data     | Object | 如果是生成下拉组件、多选框、单选时，提供该字段用于生成选项数据（不是必须） | No       |
 | column   | Object | 该表单项独占多少列，宽度计算公式为 24/column | No       |
+| show   | Boolean | 控制表单项显示与否，默认为：true | No       |
 
 ## 当前支持的组件
 
@@ -276,4 +277,3 @@ const schema = reactive({
 | slider       | a-slider                  |
 | textarea     | a-textarea                |
 | rate         | a-rate                    |
-| 拼命开发中    | ...                       |
