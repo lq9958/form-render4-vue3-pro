@@ -23,6 +23,11 @@
       </form-render4-vue3-pro>
       <a-link v-else status="danger">json 格式不正确~</a-link>
       <a-divider />
+      <div>
+        <a-space >
+          隐藏表单项：<a-switch v-model="showFormItem" @change="changeFormItemDisplayState"></a-switch>
+        </a-space>
+      </div>
       <a-space align="center">
         <div class="form-data">表单数据：{{ formData }}</div>
       </a-space>
@@ -111,6 +116,16 @@ const optionData = reactive({
 const resetFormData = () => {
   formRenderInstance.value && formRenderInstance.value.reset()
 }
+const changeFormItemDisplayState = (value, _) => {
+  formSchema.fields.forEach(item => {
+    if(Object.prototype.hasOwnProperty.call(item,'show')) {
+      item.show = !value
+    }
+  })
+}
+
+const showFormItem = ref(false)
+
 </script>
 
 <style lang="scss">

@@ -12,7 +12,7 @@
       </a-row>
     </div>
     <component
-      :is="renderComponent"
+      :is="componentMap[type]"
       v-else
       :schema="schema"
       v-bind="schema.props"
@@ -21,17 +21,37 @@
 </template>
 
 <script setup>
-  import { defineAsyncComponent, computed, reactive, ref, inject } from 'vue';
+  import { computed, reactive,ref } from 'vue';
+  // fix: 表单渲染白屏问题
+  import FormRenderInput from './widget/input.vue';
+  import FormRenderInputNumber from './widget/input-number.vue';
+  import FormRenderSelect from './widget/select.vue';
+  import FormRenderSlider from './widget/slider.vue';
+  import FormRenderCheckbox from './widget/checkbox.vue';
+  import FormRenderRadio from './widget/radio.vue';
+  import FormRenderRate from './widget/rate.vue';
+  import FormRenderSwitch from './widget/switch.vue';
+  import FormRenderTextarea from './widget/textarea.vue';
 
-  const formData = inject('form-render-data');
+    const componentMap = {
+    'input': FormRenderInput,
+    'input-number': FormRenderInputNumber,
+    'select': FormRenderSelect,
+    'slider': FormRenderSlider,
+    'checkbox': FormRenderCheckbox,
+    'radio': FormRenderRadio,
+    'rate': FormRenderRate,
+    'switch': FormRenderSwitch,
+    'textarea': FormRenderTextarea,
+  };
   const props = defineProps({
     schema: Object,
   });
 
   const schema = reactive(props.schema);
+  const type = ref(schema.type);
   const isFormItem = computed(() => schema.type === 'form-item');
-  // v1.2.0 form-tiem配置新增span项，原本column不变
-  const computedSpan = () => {
+  const span = computed(() => {
     if (isFormItem.value) {
       if (schema.children.span) {
         return schema.children.span;
@@ -39,14 +59,10 @@
       return 24;
     }
     return 24;
-  }
-  const column = computedSpan();
+  });
+
   const children = isFormItem.value ? schema.children.items : [];
 
-  const type = ref(schema.type);
-  const renderComponent = defineAsyncComponent(() =>
-    import(`./widget/${type.value}.vue`)
-  );
 </script>
 
 <script>

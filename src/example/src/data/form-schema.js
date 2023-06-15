@@ -10,6 +10,7 @@ export const SIMPLEFORM = {
     field: "name",
     title: "姓名",
     value: "QQ",
+    show: true,
     props: {
       rules: [{
         required: true,

@@ -6,15 +6,18 @@
         :key="field.field"
         :span="computedSpan(field)"
       >
-        <a-form-item
-          v-if="haveSolt(field)"
-          :field="field.field"
-          :label="field.title"
-          v-bind="field.props"
-        >
-          <slot :name="field.field" :data="formData"> </slot>
-        </a-form-item>
-        <form-render-item v-else :schema="field" :form-data="formData" />
+        <template v-if="shouldDisplay(field)">
+          <div v-if="haveSolt(field)" class="form-render-item">
+            <a-form-item
+              :field="field.field"
+              :label="field.title"
+              v-bind="field.props"
+            >
+              <slot :name="field.field" :data="formData"> </slot>
+            </a-form-item>
+          </div>
+          <form-render-item v-else :schema="field" :form-data="formData" />
+        </template>
       </a-col>
       <a-col :span="24 / column">
         <a-form-item no-style>
@@ -87,6 +90,13 @@
     return schema.field in slots;
   };
 
+  // feat: schema 新增show字段方便更加灵活控制表单项的渲染
+  const shouldDisplay = (schema) => {
+    if (Object.prototype.hasOwnProperty.call(schema, 'show')) {
+      return schema.show;
+    }
+    return true;
+  };
   defineExpose({
     validate,
     reset,
