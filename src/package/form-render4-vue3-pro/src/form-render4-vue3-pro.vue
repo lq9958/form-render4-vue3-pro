@@ -30,6 +30,7 @@
 
 <script setup>
   import { watch, ref, provide, reactive, useSlots } from 'vue';
+  import '@arco-design/web-vue/dist/arco.css'
   import FormRenderItem from './components/form-render-item.vue';
 
   const slots = useSlots();
