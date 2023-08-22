@@ -81,6 +81,10 @@
     return 24 / column.value;
   };
 
+  // 清除表单校验结果
+  const clearValidate = () => {
+    formInstance.value.clearValidate();
+  };
   const reset = (fieldlist) => {
     // eslint-disable-next-line no-unused-expressions
     formInstance.value && formInstance.value.resetFields(fieldlist);
@@ -101,6 +105,7 @@
   defineExpose({
     validate,
     reset,
+    clearValidate
   });
 </script>
 
