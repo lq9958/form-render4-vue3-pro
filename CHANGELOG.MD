@@ -1,3 +1,10 @@
+## v1.3.0 (2023-08-23)
+### ❗❗Break Change（Important）❗❗
+- 😅自v1.3.0起，组件不再支持在Schema中装载数据，数据和表单配置完全分离。
+
+### Bug Fix
+- 🐛 修复option-data中未提供label,value字段时报错的问题
+
 ## v1.2.7 (2023-08-22)
 
 ### Feature

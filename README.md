@@ -7,23 +7,12 @@
 [在线演示](https://lq9958.github.io/)
 
 ## [💎更新日志](./CHANGELOG.MD)
-2023-5-10 v1.2.0
-- 🍬 使用span代替form-item schema中column字段
-- 🐛 修复schema中无column字段时无法渲染表单的问题
-- 🐛 修复input组件显示异常的问题
-
-2023-5-6
-
-- ✅ 新增自定义表单选项组件
-
----
-
-- ✅ 支持 form-item 中的嵌套
-- ✅ 数据项和 schema 分离
 
 ## 数据项说明
 
-组件的 item 项目前的优先级为 optionData > schema.data 组件会优先在 optionData 中查找该字段的数据源。如果未提供，组件将尝试在 schema 的 data 字段中获取数据源，如果均为提供组件将会抛出异常。
+~~组件的 item 项目前的优先级为 optionData > schema.data 组件会优先在 optionData 中查找该字段的数据源。如果未提供，组件将尝试在 schema 的 data 字段中获取数据源，如果均为提供组件将会抛出异常。~~
+
+自v1.3.0起，不再支持在Schema中装载数据，组件只会在option-data中查找需要的字段。
 
 ## 🌈如何使用
 
@@ -228,12 +217,13 @@ const schema = reactive({
 | -------- | ------ | --------------------------------------------------- | -------- |
 | modelValue(v-model)   | Object  | 表单数据对象                           | Yes      |
 | schema    | Object | 生成表单的JSON对象                                  | Yes       |
-| optionData    | Object      | `select、checkbox、radio`等组件选项的数据源，也可在schema中提供，但是组件会优先在optionData中查找数据 | No       |
+| optionData    | Object      | `select、checkbox、radio`等组件选项的数据源，~~也可在schema中提供，但是组件会优先在optionData中查找数据~~ | No       |
 
 ### <from-render4-vue3> Methods
 | 方法名   | 描述   | 参数 | 返回值 |   
 | -------- | --------|--------|--------| 
 | validate | 校验表单全部数据   | - | Promise |  
+| clearValidate | 清除校验表单校验数据   | - | - |  
 | reset    | 重置表单字段   | -/string[] | void |  
 
 ### <form-render4-vue3> Slots
@@ -261,7 +251,7 @@ const schema = reactive({
 | field    | String | 表单项字段                                                                 | Yes      |
 | value    | any    | 该表表单项的值                                                             | No       |
 | props    | Object | 生成最终组件的 props 项，对应 arco-design 组件的 props                     | No       |
-| data     | Object | 如果是生成下拉组件、多选框、单选时，提供该字段用于生成选项数据（不是必须） | No       |
+| ~~data~~     | Object | ~~如果是生成下拉组件、多选框、单选时，提供该字段用于生成选项数据（不是必须）~~ | No       |
 | column   | Object | 该表单项独占多少列，宽度计算公式为 24/column | No       |
 | show   | Boolean | 控制表单项显示与否，默认为：true | No       |
 
