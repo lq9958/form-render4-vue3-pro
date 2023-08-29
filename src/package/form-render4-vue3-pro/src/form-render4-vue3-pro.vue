@@ -46,7 +46,7 @@
   });
   provide('form-render-data', formData);
   provide('form-render-option-data', props.optionData || {});
-  provide('global-schema', schema || {});
+  provide('global-schema', props.schema || {});
   const emit = defineEmits(['update:modelValue']);
 
   const schema = reactive(props.schema);
