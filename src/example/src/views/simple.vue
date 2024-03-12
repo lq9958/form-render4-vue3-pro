@@ -24,12 +24,20 @@
       <a-link v-else status="danger">json 格式不正确~</a-link>
       <a-divider />
       <div>
-        <a-space >
-          隐藏表单项：<a-switch v-model="showFormItem" @change="changeFormItemDisplayState"></a-switch>
+        <a-space>
+          隐藏表单项：<a-switch
+            v-model="showFormItem"
+            @change="changeFormItemDisplayState"
+          ></a-switch>
         </a-space>
       </div>
       <a-space align="center">
-        <div class="form-data">表单数据：{{ formData }}</div>
+        <div class="form-data">
+          表单数据：
+          <pre>
+           <div>{{ JSON.stringify(formData, null, 2) }}</div>
+          </pre>
+        </div>
       </a-space>
     </div>
     <div class="editor-container">
@@ -87,29 +95,115 @@ const validateForm = async () => {
     }
   }
 }
+
+const staticData = [
+  {
+    value: 'song',
+    label: '唱',
+  },
+  {
+    value: 'dance',
+    label: '跳',
+  },
+  {
+    value: 'rap',
+    label: 'rap',
+  },
+  {
+    value: 'basketball',
+    label: '篮球',
+  },
+]
 const optionData = reactive({
   checkbox: {
+    list: staticData,
+    key: 'value',
+  },
+  cascader: {
     list: [
       {
-        value: 'song',
-        label: '唱',
+        value: 'beijing',
+        label: 'Beijing',
+        children: [
+          {
+            value: 'chaoyang',
+            label: 'ChaoYang',
+            children: [
+              {
+                value: 'datunli',
+                label: 'Datunli',
+              },
+            ],
+          },
+          {
+            value: 'haidian',
+            label: 'Haidian',
+          },
+          {
+            value: 'dongcheng',
+            label: 'Dongcheng',
+          },
+          {
+            value: 'xicheng',
+            label: 'Xicheng',
+            children: [
+              {
+                value: 'jinrongjie',
+                label: 'Jinrongjie',
+              },
+              {
+                value: 'tianqiao',
+                label: 'Tianqiao',
+              },
+            ],
+          },
+        ],
       },
       {
-        value: 'dance',
-        label: '跳',
-      },
-      {
-        value: 'rap',
-        label: 'rap',
-      },
-      {
-        value: 'basketball',
-        label: '篮球',
+        value: 'shanghai',
+        label: 'Shanghai',
+        children: [
+          {
+            value: 'huangpu',
+            label: 'Huangpu',
+          },
+        ],
       },
     ],
     key: 'value',
-    value: 'value',
-    // label: 'label',
+  },
+  treeselect: {
+    list: [
+      {
+        key: 'node1',
+        title: 'node1',
+        children: [
+          {
+            key: 'node2',
+            title: 'node2',
+          },
+        ],
+      },
+      {
+        key: 'node3',
+        title: 'node3',
+        children: [
+          {
+            key: 'node4',
+            title: 'node4',
+          },
+          {
+            key: 'node5',
+            title: 'node5',
+          },
+        ],
+      },
+    ],
+    key: 'key',
+  },
+  transfer: {
+    list: staticData,
+    key: 'value',
   },
 })
 
@@ -117,15 +211,14 @@ const resetFormData = () => {
   formRenderInstance.value && formRenderInstance.value.reset()
 }
 const changeFormItemDisplayState = (value, _) => {
-  formSchema.fields.forEach(item => {
-    if(Object.prototype.hasOwnProperty.call(item,'show')) {
+  formSchema.fields.forEach((item) => {
+    if (Object.prototype.hasOwnProperty.call(item, 'show')) {
       item.show = !value
     }
   })
 }
 
 const showFormItem = ref(false)
-
 </script>
 
 <style lang="scss">

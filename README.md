@@ -6,15 +6,15 @@
 
 [在线演示](https://lq9958.github.io/)
 
-## [💎更新日志](./CHANGELOG.MD)
+## [💎 更新日志(v2.0.0 发布啦！！！)](./CHANGELOG.MD)
 
 ## 数据项说明
 
 ~~组件的 item 项目前的优先级为 optionData > schema.data 组件会优先在 optionData 中查找该字段的数据源。如果未提供，组件将尝试在 schema 的 data 字段中获取数据源，如果均为提供组件将会抛出异常。~~
 
-自v1.3.0起，不再支持在Schema中装载数据，组件只会在option-data中查找需要的字段。
+自 v1.3.0 起，不再支持在 Schema 中装载数据，组件只会在 option-data 中查找需要的字段。
 
-## 🌈如何使用
+## 🌈 如何使用
 
 ### 安装
 
@@ -36,13 +36,11 @@ app.mount('#app')
 ```vue
 <template>
   <!-- 你的组件 -->
-  <div>
-    <form-render4-vue3-pro
-      :schema="schema"
-      v-model="formData"
-      :option-data="optionData"
-    />
-  </div>
+  <form-render4-vue3-pro
+    :schema="schema"
+    v-model="formData"
+    :option-data="optionData"
+  />
 </template>
 
 <script setup>
@@ -69,11 +67,14 @@ const optionData = reactive({
         value: 'chengdu',
       },
     ],
-    label: 'label',
-    value: 'value',
+    key: 'value',
   },
 })
 const schema = reactive({
+  props: {
+    layout: 'horizontal',
+    labelAlign: 'left',
+  },
   fields: [
     {
       type: 'input',
@@ -85,153 +86,42 @@ const schema = reactive({
       },
     },
     {
-      type: 'input',
-      title: '年龄',
-      field: 'age',
-      value: '',
-      props: {
-        type: 'number',
-        placeholder: '输入年龄',
-      },
-    },
-    {
-      type: 'number',
-      title: '工作时长(年)',
-      field: 'experience',
-      value: '',
-      props: {
-        step: 0.5,
-      },
-    },
-    {
       type: 'select',
-      title: '现居地',
+      title: '地址',
       field: 'address',
       value: '',
       props: {
-        placeholder: '选择现居地',
+        placeholder: '选择地址',
       },
-      data: {
-        list: [
-          {
-            label: '北京',
-            value: 'beijing',
-          },
-          {
-            label: '上海',
-            value: 'shanghai',
-          },
-          {
-            label: '深圳',
-            value: 'shenzhen',
-          },
-          {
-            label: '成都',
-            value: 'chengdu',
-          },
-        ],
-        label: 'label',
-        value: 'value',
-      },
-    },
-    {
-      type: 'radio',
-      title: '性别',
-      field: 'gender',
-      value: '',
-      data: {
-        list: [
-          {
-            label: '男',
-            value: 'man',
-          },
-          {
-            label: '女',
-            value: 'woman',
-          },
-          {
-            label: '男女',
-            value: 'woman&man',
-          },
-        ],
-        label: 'label',
-        value: 'value',
-      },
-    },
-    {
-      type: 'checkbox',
-      title: '爱好',
-      field: 'likes',
-      value: '',
-      data: {
-        list: [
-          {
-            label: '唱',
-            value: 'song',
-          },
-          {
-            label: '跳',
-            value: 'dance',
-          },
-          {
-            label: 'rap',
-            value: 'rap',
-          },
-          {
-            label: '篮球',
-            value: 'basketball',
-          },
-        ],
-        label: 'label',
-        value: 'value',
-      },
-    },
-    {
-      type: 'slider',
-      title: '身高',
-      field: 'height',
-      value: '',
-      props: {
-        min: 100,
-        max: 200,
-      },
-    },
-    {
-      type: 'switch',
-      title: '信息公开',
-      field: 'public',
-      value: '',
     },
   ],
-  props: {
-    layout: 'horizontal',
-    labelAlign: 'left',
-  },
 })
 </script>
 ```
 
 ## API
+
 ### <from-render4-vue3> Props
-| 参数名 | 类型   | 描述                                                    | 是否必须 |
-| -------- | ------ | --------------------------------------------------- | -------- |
-| modelValue(v-model)   | Object  | 表单数据对象                           | Yes      |
-| schema    | Object | 生成表单的JSON对象                                  | Yes       |
-| optionData    | Object      | `select、checkbox、radio`等组件选项的数据源，~~也可在schema中提供，但是组件会优先在optionData中查找数据~~ | No       |
+
+| 参数名              | 类型   | 描述                                                                         | 是否必须 |
+| ------------------- | ------ | ---------------------------------------------------------------------------- | -------- |
+| modelValue(v-model) | Object | 表单数据对象                                                                 | Yes      |
+| schema              | Object | 生成表单的 JSON 对象                                                         | Yes      |
+| optionData          | Object | `select、checkbox、radio、tree-select、cascader、transfer`等组件选项的数据源 | No       |
 
 ### <from-render4-vue3> Methods
-| 方法名   | 描述   | 参数 | 返回值 |   
-| -------- | --------|--------|--------| 
-| validate | 校验表单全部数据   | - | Promise |  
-| clearValidate | 清除校验表单校验数据   | - | - |  
-| reset    | 重置表单字段   | -/string[] | void |  
+
+| 方法名        | 描述                 | 参数       | 返回值  |
+| ------------- | -------------------- | ---------- | ------- |
+| validate      | 校验表单全部数据     | -          | Promise |
+| clearValidate | 清除校验表单校验数据 | -          | -       |
+| reset         | 重置表单字段         | -/string[] | void    |
 
 ### <form-render4-vue3> Slots
-| 插槽名   | 描述   | 参数 |  
-| -------- | --------|--------|
-| footer | 页脚 | -  | -    |
 
-
+| 插槽名 | 描述 | 参数 |     |
+| ------ | ---- | ---- | --- |
+| footer | 页脚 | -    | -   |
 
 ## Schema 字段描述
 
@@ -240,30 +130,40 @@ const schema = reactive({
 | fields   | Array  | 生成表单项的数组                           | Yes      |
 | rules    | Object | 使用方式参考 arco-design from 表单 rules   | No       |
 | props    | -      | 使用方式参考 arco-design from 表单原生属性 | No       |
-| column   | Number | 生成表单项的列数                          | Yes       |
+| column   | Number | 生成表单项的列数                           | Yes      |
+| gutter   | Number | 表单项之间的间隔                           | No       |
 
 ### fields 字段描述
 
-| 字段名称 | 类型   | Description                                                                | 是否必须 |
-| -------- | ------ | -------------------------------------------------------------------------- | -------- |
-| type     | String | 指定生成对应 arco-design 的组件，对应关系见下表 type                       | Yes      |
-| title    | String | 表单项的名称                                                               | Yes      |
-| field    | String | 表单项字段                                                                 | Yes      |
-| value    | any    | 该表表单项的值                                                             | No       |
-| props    | Object | 生成最终组件的 props 项，对应 arco-design 组件的 props                     | No       |
-| ~~data~~     | Object | ~~如果是生成下拉组件、多选框、单选时，提供该字段用于生成选项数据（不是必须）~~ | No       |
-| column   | Object | 该表单项独占多少列，宽度计算公式为 24/column | No       |
-| show   | Boolean | 控制表单项显示与否，默认为：true | No       |
+| 字段名称 | 类型    | Description                                            | 是否必须 |
+| -------- | ------- | ------------------------------------------------------ | -------- |
+| type     | String  | 指定生成对应 arco-design 的组件，对应关系见下表 type   | Yes      |
+| gutter   | Number  | 用与表单项之间的间隔 ，该项不设置会自动取全局的 gutter | No       |
+| title    | String  | 表单项的名称                                           | Yes      |
+| field    | String  | 表单项字段                                             | Yes      |
+| value    | any     | 该表表单项的值                                         | No       |
+| props    | Object  | 生成最终组件的 props 项，对应 arco-design 组件的 props | No       |
+| span     | Number  | 该表单项独占多少列，宽度计算公式为 24/span             | No       |
+| show     | Boolean | 控制表单项显示与否，默认为：true                       | No       |
 
 ## 当前支持的组件
 
-| type         | 对应的 arco-design 组件名 |
-| ------------ | ------------------------- |
-| input        | a-input                   |
-| input-number | a-input-number            |
-| checkbox     | a-checkbox                |
-| radio        | a-radio                   |
-| switch       | a-switch                  |
-| slider       | a-slider                  |
-| textarea     | a-textarea                |
-| rate         | a-rate                    |
+| type              | 对应的 arco-design 组件名        |
+| ----------------- | -------------------------------- |
+| form-item         | 表单项，复杂表单布局可能会使用到 |
+| input             | a-input                          |
+| input-number      | a-input-number                   |
+| checkbox          | a-checkbox                       |
+| radio             | a-radio                          |
+| switch            | a-switch                         |
+| slider            | a-slider                         |
+| textarea          | a-textarea                       |
+| rate              | a-rate                           |
+| upload            | a-upload                         |
+| time-picker       | a-time-picker                    |
+| verification-code | a-verification-code              |
+| tree-select       | a-tree-select                    |
+| date-range-picker | a-date-range-picker              |
+| date-picker       | a-date-picker                    |
+| cascader          | a-cascader                       |
+| transfer          | a-transfer                       |

@@ -1,7 +1,8 @@
 export const SIMPLEFORM = {
-  column: 2,
+  column: 1,
+  gutter: 8,
   props: {
-    layout: "horizontal",
+    layout: "vertical",
     labelAlign: "left",
     autoLabelWidth: true
   },
@@ -88,65 +89,166 @@ export const SIMPLEFORM = {
     title: "嵌套表单",
     value: 10,
     props: {},
+    gutter: 24,
     children: {
-      column: 1,
-      items: [{
-        type: "rate",
-        field: "rate2",
-        title: "评分",
-        value: 10,
-        props: {
-          rules: [{
-            required: true,
-            message: '评分必选'
-          }, {
-            validator: (value, callback) => {
-              if (value < 5) {
-                callback("评分不能低于5颗星");
-              }
-            },
-            trigger: "blur",
-          },]
+      items: [
+        {
+          type: "rate",
+          field: "rate2",
+          title: "评分",
+          value: 10,
+          span: 12,
+          props: {
+            rules: [{
+              required: true,
+              message: '评分必选'
+            }, {
+              validator: (value, callback) => {
+                if (value < 5) {
+                  callback("评分不能低于5颗星");
+                }
+              },
+              trigger: "blur",
+            },]
+          },
+        },
+        {
+          type: "date-picker",
+          field: "datepicker",
+          title: "日期",
+          value: 10,
+          span: 12,
+          props: {
+            rules: [{
+              required: true,
+              message: '日期必选'
+            }]
+          },
+        },
+        {
+          type: "tree-select",
+          field: "treeselect",
+          title: "选择树",
+          value: 10,
+          span: 12,
+          props: {
+            rules: [{
+              required: true,
+              message: '选择树'
+            }],
+          }
+        },
+        {
+          type: "cascader",
+          field: "cascader",
+          title: "级联选择器",
+          value: 10,
+          span: 12,
+          props: {
+            rules: [{
+              required: true,
+              message: '级联选择器必选'
+            }]
+          }
+        },
+        {
+          type: "upload",
+          field: "upload",
+          title: "文件传输",
+          value: 10,
+          span: 12,
+          props: {
+            draggable: true,
+            autoUpload: false
+          },
+        },
+        {
+          type: "transfer",
+          field: "transfer",
+          title: "穿梭框",
+          value: 10,
+          span: 12,
+          props: {
+          },
+        },
+        {
+          type: "verification-code",
+          field: "verificationcode",
+          title: "验证码",
+          value: 10,
+          span: 12,
+          props: {
+            rules: [{
+              required: true,
+              message: '验证码'
+            }]
+          },
+        },
+        {
+          type: "time-picker",
+          field: "timepicker",
+          title: "时间选择",
+          value: 10,
+          span: 12,
+          props: {
+            rules: [{
+              required: true,
+              message: '时间选择'
+            }]
+          },
+        },
+        {
+          type: "date-range-picker",
+          field: "daterangepicker",
+          title: "日期范围",
+          value: 10,
+          span: 12,
+          props: {
+            rules: [{
+              required: true,
+              message: '日期必选'
+            }]
+          },
         },
 
-      },
-      {
-        type: "select",
-        field: "like2",
-        title: "爱好",
-        value: "rap",
-        data: {
-          list: [{
-            value: "song",
-            label: "唱"
-          },
-          {
-            value: "dance",
-            label: "跳"
-          },
-          {
-            value: "rap",
-            label: "rap"
-          },
-          {
-            value: "basketball",
-            label: "篮球"
-          },
-          ],
-          key: "value",
-        },
-        props: {
-          allowClear: true,
-          rules: [{
-            validator: (value, callback) => {
-              if (value < 3) {
-                callback("评分不能低于3颗星");
-              }
+        {
+          type: "select",
+          field: "like2",
+          title: "爱好",
+          value: "rap",
+          span: 12,
+          data: {
+            list: [{
+              value: "song",
+              label: "唱"
             },
-            trigger: "blur",
-          },]
+            {
+              value: "dance",
+              label: "跳"
+            },
+            {
+              value: "rap",
+              label: "rap"
+            },
+            {
+              value: "basketball",
+              label: "篮球"
+            },
+            ],
+            key: "value",
+          },
+          props: {
+            allowClear: true,
+            rules: [{
+              validator: (value, callback) => {
+                if (value < 3) {
+                  callback("评分不能低于3颗星");
+                }
+              },
+              trigger: "blur",
+            },]
+          },
         },
-      },
       ],
     },
   },
@@ -253,8 +355,8 @@ export const SIMPLEFORM = {
     },
   },
   {
-    field:'slot',
-    title:'自定义表单项',
+    field: 'slot',
+    title: '自定义表单项',
   }
   ],
 }
@@ -266,9 +368,18 @@ export const SIMPLEFORMDATA = {
   height: 170,
   experience: 0.5,
   age: 1,
+  rate: 0,
   rate2: 0,
+  datepicker: '',
+  daterangepicker: [],
+  timepicker: '',
   like2: "",
   like: "",
   radio: "",
-  checkbox: []
+  checkbox: [],
+  verificationcode: "",
+  cascader: '',
+  treeselect: [],
+  upload: [],
+  transfer: []
 }

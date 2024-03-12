@@ -1,13 +1,8 @@
 <template>
-  <a-space>
-    <a-upload
-      v-model:file-list="formData[filedName]"
-      v-bind="attrs"
-      :style="{
-        width: '100%',
-      }"
-    ></a-upload>
-  </a-space>
+  <a-verification-code
+    v-model="formData[filedName]"
+    v-bind="attrs"
+  ></a-verification-code>
 </template>
 
 <script setup>
@@ -25,6 +20,6 @@ const attrs = schema.props || {}
 
 <script>
 export default {
-  name: 'FormRenderUpload',
+  name: 'FormRenderVerificationCode',
 }
 </script>

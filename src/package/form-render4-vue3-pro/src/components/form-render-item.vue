@@ -1,27 +1,27 @@
 <template>
-  <div
-    :class="[globalSchema.props.layout === 'inline' ? 'form_item_inline' : '']"
+  <a-form-item
+    :field="schema.field"
+    :label="schema.title"
+    v-bind="schema.props"
   >
-    <a-form-item
-      :field="schema.field"
-      :label="schema.title"
+    <div v-if="isFormItem">
+      <a-row :gutter="gutter">
+        <a-col
+          v-for="child in children"
+          :key="child.field"
+          :span="getSpan(child)"
+        >
+          <form-render-item :schema="child"></form-render-item>
+        </a-col>
+      </a-row>
+    </div>
+    <component
+      :is="componentMap[type]"
+      v-else
+      :schema="schema"
       v-bind="schema.props"
-    >
-      <div v-if="isFormItem">
-        <a-row :span="24">
-          <a-col v-for="child in children" :key="child.field" :span="span">
-            <form-render-item :schema="child"></form-render-item>
-          </a-col>
-        </a-row>
-      </div>
-      <component
-        :is="componentMap[type]"
-        v-else
-        :schema="schema"
-        v-bind="schema.props"
-      />
-    </a-form-item>
-  </div>
+    />
+  </a-form-item>
 </template>
 
 <script setup>
@@ -36,6 +36,17 @@ import FormRenderRadio from './widget/radio.vue'
 import FormRenderRate from './widget/rate.vue'
 import FormRenderSwitch from './widget/switch.vue'
 import FormRenderTextarea from './widget/textarea.vue'
+// @since 2.0.0 新增内置组件
+import FormRenderCascader from './widget/cascader.vue'
+import FormRenderDatePicker from './widget/datepicker.vue'
+import FormRenderDateRangePicker from './widget/date-range-picker.vue'
+import FormRenderVerificationCode from './widget/verification-code.vue'
+import FormRenderTreeSelect from './widget/tree-select.vue'
+import FormRenderTimePicker from './widget/timepicker.vue'
+import FormRenderUpload from './widget/upload.vue'
+import FormRenderTransfer from './widget/transfer.vue'
+
+import { isNumber, is } from '../utils/index.js'
 
 const componentMap = {
   input: FormRenderInput,
@@ -47,24 +58,42 @@ const componentMap = {
   rate: FormRenderRate,
   switch: FormRenderSwitch,
   textarea: FormRenderTextarea,
+  cascader: FormRenderCascader,
+  'date-picker': FormRenderDatePicker,
+  'date-range-picker': FormRenderDateRangePicker,
+  'verification-code': FormRenderVerificationCode,
+  'tree-select': FormRenderTreeSelect,
+  'time-picker': FormRenderTimePicker,
+  upload: FormRenderUpload,
+  transfer: FormRenderTransfer,
 }
 const props = defineProps({
   schema: Object,
 })
-
-const globalSchema = inject('global-schema')
+const globalSchema = inject('form-render-schema')
 const schema = reactive(props.schema)
+
+// @since 2.0.0 新增guuter属性，用于控制表单栅栏间隔
+const gutter = ref(schema.gutter || globalSchema.gutter || 8)
 const type = ref(schema.type)
 const isFormItem = computed(() => schema.type === 'form-item')
-const span = computed(() => {
+const getSpan = (child) => {
+  // 如果当前表单项是form-item，则取子项的span值
   if (isFormItem.value) {
-    if (schema.children.span) {
-      return schema.children.span
+    if (isNumber(child.span)) {
+      return child.span
+    } else {
+      console.warn(
+        `[Form-Render4-Vue3-Pro]: field '${
+          child.field
+        }' attribute 'span' value type must be number, but get a ${is(
+          child.span
+        )}.`
+      )
     }
-    return 24
   }
   return 24
-})
+}
 
 const children = isFormItem.value ? schema.children.items : []
 </script>
@@ -74,9 +103,3 @@ export default {
   name: 'FormRenderItem',
 }
 </script>
-
-<style lang="less" scoped>
-.form_item_inline {
-  margin-bottom: 20px;
-}
-</style>

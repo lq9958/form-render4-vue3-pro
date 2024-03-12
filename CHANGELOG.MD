@@ -1,46 +1,59 @@
+## 🎊🎊🎊 v2.0.0 (2024-03-12)
+
+### Feature
+
+- 新增 `transfer`、`upload`、`time-picker`、`verification-code`、`tree-select`、`date-range-picker`、`date-picker`、`cascader`等 8 个内置组件
+- 表单 schema 新增`gutter`字段，用以调整表单项之间的间隔
+
 ## v1.3.0 (2023-08-29)
+
 ## Style
-- 🌼 调整组件layout为inline时，组件item的样式
+
+- 🌼 调整组件 layout 为 inline 时，组件 item 的样式
 
 ## v1.3.0 (2023-08-23)
+
 ### ❗❗Break Change（Important）❗❗
-- 😅自v1.3.0起，组件不再支持在Schema中装载数据，数据和表单配置完全分离。
+
+- 😅 自 v1.3.0 起，组件不再支持在 Schema 中装载数据，数据和表单配置完全分离。
 
 ### Bug Fix
-- 🐛 修复option-data中未提供label,value字段时报错的问题
+
+- 🐛 修复 option-data 中未提供 label,value 字段时报错的问题
 
 ## v1.2.7 (2023-08-22)
 
 ### Feature
-- 🍬新增清除校验规则方法
+
+- 🍬 新增清除校验规则方法
 
 ## v1.2.4 (2023-06-15)
 
 ### Feature
+
 - 🍬`schema`新增`show`属性，可以更加灵活的控制表单项的渲染
 
 ### Bug Fix
 
-- 🐛 修复表单初次渲染时form-item渲染缓慢导致白屏的问题
-
+- 🐛 修复表单初次渲染时 form-item 渲染缓慢导致白屏的问题
 
 ## v1.2.3 (2023-05-12)
 
 ### Feature
-- 🍬更新组件中的错误提示，提示更加人性化
 
+- 🍬 更新组件中的错误提示，提示更加人性化
 
 ## v1.2.2 (2023-05-10)
 
 ### Bug Fix
 
-- 🐛 修复watch监听无响应的问题
-
+- 🐛 修复 watch 监听无响应的问题
 
 ## v1.2.1 (2023-05-10)
 
 ### Bug Fix
-- 🐛 修复option-data数据变化时，组件无响应的问题
+
+- 🐛 修复 option-data 数据变化时，组件无响应的问题
 
 ## v1.2.0 (2023-05-10)
 
