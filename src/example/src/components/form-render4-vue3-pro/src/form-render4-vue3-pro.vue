@@ -12,7 +12,7 @@
               <a-form-item
                 :field="field.field"
                 :label="field.title"
-                v-bind="field.props"
+                v-bind="field.config || {}"
               >
                 <slot :name="field.field" :data="formData"> </slot>
               </a-form-item>

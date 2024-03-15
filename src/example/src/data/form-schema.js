@@ -1,10 +1,10 @@
 export const SIMPLEFORM = {
-  column: 1,
   gutter: 8,
   props: {
     layout: "horizontal",
     labelAlign: "left",
-    autoLabelWidth: true
+    autoLabelWidth: true,
+    scrollToField: true
   },
   fields: [{
     type: "input",
@@ -12,7 +12,9 @@ export const SIMPLEFORM = {
     title: "姓名",
     value: "QQ",
     show: true,
-    props: {
+    span: 12,
+    config: {
+      showColon: true,
       rules: [{
         required: true,
         message: "名称为必填项"
@@ -28,12 +30,16 @@ export const SIMPLEFORM = {
       },
       ],
     },
+    props: {
+
+    },
   },
   {
     type: "slider",
     field: "height",
     title: "身高(cm)",
     value: 170,
+    span: 12,
     props: {
       max: 300
     },
@@ -46,12 +52,7 @@ export const SIMPLEFORM = {
     type: "input-number",
     field: "experience",
     title: "工作时长(年)",
-    props: {
-      setp: 0.5,
-      precision: 1,
-      max: 2.5,
-      min: 0,
-      mode: 'button',
+    config: {
       rules: [{
         required: true,
         message: '工作时长为必填项',
@@ -66,13 +67,21 @@ export const SIMPLEFORM = {
       }
       ]
     },
+    props: {
+      setp: 0.5,
+      precision: 1,
+      max: 2.5,
+      min: 0,
+      mode: 'button',
+
+    },
   },
   {
     type: "rate",
     field: "rate",
     title: "评分",
     value: 10,
-    props: {
+    config: {
       rules: [{
         required: true,
         message: '评分必选'
@@ -84,6 +93,9 @@ export const SIMPLEFORM = {
         },
         trigger: "blur",
       },]
+    },
+    props: {
+
     },
   },
 
@@ -102,7 +114,7 @@ export const SIMPLEFORM = {
           title: "评分",
           value: 10,
           span: 12,
-          props: {
+          config: {
             rules: [{
               required: true,
               message: '评分必选'
@@ -115,6 +127,7 @@ export const SIMPLEFORM = {
               trigger: "blur",
             },]
           },
+          props: {},
         },
         {
           type: "date-picker",
@@ -122,12 +135,13 @@ export const SIMPLEFORM = {
           title: "日期",
           value: 10,
           span: 12,
-          props: {
+          config: {
             rules: [{
               required: true,
               message: '日期必选'
             }]
           },
+          props: {},
         },
         {
           type: "tree-select",
@@ -135,12 +149,13 @@ export const SIMPLEFORM = {
           title: "选择树",
           value: 10,
           span: 12,
-          props: {
+          config: {
             rules: [{
               required: true,
               message: '选择树'
             }],
-          }
+          },
+          props: {}
         },
         {
           type: "cascader",
@@ -148,12 +163,13 @@ export const SIMPLEFORM = {
           title: "级联选择器",
           value: 10,
           span: 12,
-          props: {
+          config: {
             rules: [{
               required: true,
               message: '级联选择器必选'
             }]
-          }
+          },
+          props: {}
         },
         {
           type: "upload",
@@ -181,12 +197,13 @@ export const SIMPLEFORM = {
           title: "验证码",
           value: 10,
           span: 12,
-          props: {
+          config: {
             rules: [{
               required: true,
               message: '验证码'
             }]
           },
+          props: {},
         },
         {
           type: "time-picker",
@@ -194,12 +211,13 @@ export const SIMPLEFORM = {
           title: "时间选择",
           value: 10,
           span: 12,
-          props: {
+          config: {
             rules: [{
               required: true,
               message: '时间选择'
             }]
           },
+          props: {},
         },
         {
           type: "date-range-picker",
@@ -207,12 +225,13 @@ export const SIMPLEFORM = {
           title: "日期范围",
           value: 10,
           span: 12,
-          props: {
+          config: {
             rules: [{
               required: true,
               message: '日期必选'
             }]
           },
+          props: {},
         },
 
         {
@@ -221,6 +240,16 @@ export const SIMPLEFORM = {
           title: "爱好",
           value: "rap",
           span: 12,
+          config: {
+            rules: [{
+              validator: (value, callback) => {
+                if (value < 3) {
+                  callback("评分不能低于3颗星");
+                }
+              },
+              trigger: "blur",
+            },]
+          },
           data: {
             list: [{
               value: "song",
@@ -243,14 +272,7 @@ export const SIMPLEFORM = {
           },
           props: {
             allowClear: true,
-            rules: [{
-              validator: (value, callback) => {
-                if (value < 3) {
-                  callback("评分不能低于3颗星");
-                }
-              },
-              trigger: "blur",
-            },]
+
           },
         },
       ],
@@ -348,7 +370,7 @@ export const SIMPLEFORM = {
     field: "Information",
     title: "信息公开",
     value: true,
-    props: {
+    config: {
       rules: [{
         validator: (value, callback) => {
           if (!value) {
@@ -357,6 +379,7 @@ export const SIMPLEFORM = {
         }
       }]
     },
+    props: {},
   },
   {
     field: 'slot',

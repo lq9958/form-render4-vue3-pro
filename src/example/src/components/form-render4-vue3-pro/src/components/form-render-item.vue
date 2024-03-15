@@ -9,7 +9,7 @@
   <a-form-item
     :field="schema.field"
     :label="schema.title"
-    v-bind="schema.props"
+    v-bind="schema.config || {}"
     v-else
   >
     <div v-if="isFormItem">
