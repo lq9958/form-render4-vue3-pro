@@ -12,7 +12,7 @@ export default (schema) => {
  * 同理：value和label一样，未提供时会自动使用option中对应的字段
  * 如果option中没有组将抛出警告
  */
-
+  const filedName = ref(schema.field)
   const optionData = inject('form-render-option-data')
   const options = ref([])
   const haveExtraData = computed(() => {
@@ -89,7 +89,7 @@ export default (schema) => {
     if (!haveExtraData.value) {
       if (!schema.data) {
         throw new Error(
-          `[Form-Render4-Vue3-Pro]: field '${filedName}' maybe have no provide an option data.`
+          `[Form-Render4-Vue3-Pro]: field '${filedName.value}' maybe have no provide an option data.`
         )
       } else {
         options.value = schema.data.list
@@ -98,7 +98,7 @@ export default (schema) => {
       options.value = optionData[schema.field].list
     } else {
       throw new Error(
-        `[Form-Render4-Vue3-Pro]: field '${filedName}' maybe have no provide an option data.`
+        `[Form-Render4-Vue3-Pro]: field '${filedName.value}' maybe have no provide an option data.`
       )
     }
   }
