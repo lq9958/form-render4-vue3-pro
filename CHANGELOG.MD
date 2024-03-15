@@ -1,13 +1,19 @@
+## v2.1.0 (2024-03-15)
+
+### Break Change
+
+- 抽离表单项 props 中关于 `a-form-item`的配置字段至新增的`config`字段中，方便可视化配置。
+
 ## v2.0.1 (2024-03-15)
 
 ### Code Optimization
+
 - 删除了内置组件中重复代码
 
 ### Feature
 
 - 新增 `divider`内置组件，组件文本可在`props.content`字段中设置。
-- 表单项可单独设置span，当设置了表单column属性时，优先使用column作为表单项的span，当表单不存在column或者column的值为0时，则使用表单项的span值。
-
+- 表单项可单独设置 span，当设置了表单 column 属性时，优先使用 column 作为表单项的 span，当表单不存在 column 或者 column 的值为 0 时，则使用表单项的 span 值。
 
 ## 🎊🎊🎊 v2.0.0 (2024-03-12)
 

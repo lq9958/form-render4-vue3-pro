@@ -145,6 +145,7 @@ const schema = reactive({
 | props    | Object  | 生成最终组件的 props 项，对应 arco-design 组件的 props | No       |
 | span     | Number  | 该表单项独占多少列，宽度计算公式为 24/span             | No       |
 | show     | Boolean | 控制表单项显示与否，默认为：true                       | No       |
+| config   | Object  | arco-design `a-form-item`组件配置对象                  | No       |
 
 ## 当前支持的组件
 
@@ -167,3 +168,4 @@ const schema = reactive({
 | date-picker       | a-date-picker                    |
 | cascader          | a-cascader                       |
 | transfer          | a-transfer                       |
+| divider           | a-divider                        |
