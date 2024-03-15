@@ -9,7 +9,7 @@
   <a-form-item
     :field="schema.field"
     :label="schema.title"
-    v-bind="schema.props"
+    v-bind="schema.config || {}"
     v-else
   >
     <div v-if="isFormItem">
@@ -83,7 +83,7 @@ const schema = reactive(props.schema)
 // @since 2.0.0 新增guuter属性，用于控制表单栅栏间隔
 const gutter = ref(schema.gutter || globalSchema.gutter || 8)
 const type = ref(schema.type)
-console.log(type.value)
+
 const isFormItem = computed(() => schema.type === 'form-item')
 const getSpan = (child) => {
   // 如果当前表单项是form-item，则取子项的span值

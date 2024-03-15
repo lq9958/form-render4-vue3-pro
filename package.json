@@ -1,7 +1,7 @@
 {
   "name": "form-render4-vue3-pro",
   "author": "lq9958",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "A form render for vue3, base on arco-design.",
   "main": "src/package/form-render4-vue3-pro/index.js",
   "type": "module",
@@ -32,7 +32,8 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",
     "sass": "^1.61.0",
-    "vite": "^4.2.0"
+    "vite": "^4.2.0",
+    "vite-plugin-remove-console": "^2.2.0"
   },
   "homepage": "https://github.com/lq9958/form-render4-vue3-pro",
   "bugs": {
