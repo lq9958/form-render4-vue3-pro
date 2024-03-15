@@ -2,7 +2,7 @@ export const SIMPLEFORM = {
   column: 1,
   gutter: 8,
   props: {
-    layout: "vertical",
+    layout: "horizontal",
     labelAlign: "left",
     autoLabelWidth: true
   },
@@ -35,8 +35,12 @@ export const SIMPLEFORM = {
     title: "身高(cm)",
     value: 170,
     props: {
-      max: 200
+      max: 300
     },
+  },
+  {
+    type: "divider",
+    props: { direction: 'horizontal', content: '个人经历' },
   },
   {
     type: "input-number",
@@ -47,9 +51,11 @@ export const SIMPLEFORM = {
       precision: 1,
       max: 2.5,
       min: 0,
+      mode: 'button',
       rules: [{
         required: true,
-        message: '工作时长为必填项'
+        message: '工作时长为必填项',
+
       },
       {
         validator: (value, callback) => {
@@ -61,8 +67,6 @@ export const SIMPLEFORM = {
       ]
     },
   },
-
-
   {
     type: "rate",
     field: "rate",

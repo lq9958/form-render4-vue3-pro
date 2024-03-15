@@ -1,8 +1,16 @@
 <template>
+  <!-- 表单项外元素 -->
+  <component
+    v-if="noWrapper.includes(type)"
+    :is="componentMap[type]"
+    :schema="schema"
+  />
+  <!-- 表单项 -->
   <a-form-item
     :field="schema.field"
     :label="schema.title"
     v-bind="schema.props"
+    v-else
   >
     <div v-if="isFormItem">
       <a-row :gutter="gutter">
@@ -15,12 +23,7 @@
         </a-col>
       </a-row>
     </div>
-    <component
-      :is="componentMap[type]"
-      v-else
-      :schema="schema"
-      v-bind="schema.props"
-    />
+    <component v-else :is="componentMap[type]" :schema="schema" />
   </a-form-item>
 </template>
 
@@ -45,9 +48,11 @@ import FormRenderTreeSelect from './widget/tree-select.vue'
 import FormRenderTimePicker from './widget/timepicker.vue'
 import FormRenderUpload from './widget/upload.vue'
 import FormRenderTransfer from './widget/transfer.vue'
+import FormRenderDivider from './widget/divider.vue'
 
-import { isNumber, is } from '../utils/index.js'
-
+import { is } from '../utils/index.js'
+// 不需要使用a-form-item包裹的组件列表
+const noWrapper = ['divider']
 const componentMap = {
   input: FormRenderInput,
   'input-number': FormRenderInputNumber,
@@ -66,7 +71,9 @@ const componentMap = {
   'time-picker': FormRenderTimePicker,
   upload: FormRenderUpload,
   transfer: FormRenderTransfer,
+  divider: FormRenderDivider,
 }
+
 const props = defineProps({
   schema: Object,
 })
@@ -76,11 +83,12 @@ const schema = reactive(props.schema)
 // @since 2.0.0 新增guuter属性，用于控制表单栅栏间隔
 const gutter = ref(schema.gutter || globalSchema.gutter || 8)
 const type = ref(schema.type)
+console.log(type.value)
 const isFormItem = computed(() => schema.type === 'form-item')
 const getSpan = (child) => {
   // 如果当前表单项是form-item，则取子项的span值
   if (isFormItem.value) {
-    if (isNumber(child.span)) {
+    if (is(child.span) === 'number') {
       return child.span
     } else {
       console.warn(

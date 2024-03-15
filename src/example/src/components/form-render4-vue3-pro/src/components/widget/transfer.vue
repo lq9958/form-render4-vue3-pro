@@ -10,41 +10,20 @@
 </template>
 
 <script setup>
-import { inject, reactive, watch, ref, computed, onMounted } from 'vue'
-
+import { inject, reactive, watch, onMounted } from 'vue'
+import useOptionData from '../hooks'
 // 获取options
-const formData = inject('form-render-data')
-const optionData = inject('form-render-option-data')
 const props = defineProps({
   schema: Object,
 })
-
 const schema = reactive(props.schema)
+
+const formData = inject('form-render-data')
+const { optionData, getOptions, options } = useOptionData(schema)
+
 const filedName = schema.field
 const attrs = schema.props || {}
 
-const options = ref([])
-const haveExtraData = computed(() => {
-  return !!optionData[schema.field]
-})
-
-const getOptions = () => {
-  if (!haveExtraData.value) {
-    if (!schema.data) {
-      console.warn(
-        '[Form-Render4-Vue3-Pro]: transfer component must provide a option list.'
-      )
-    } else {
-      options.value = schema.data.list
-    }
-  } else if (optionData[schema.field].list) {
-    options.value = optionData[schema.field].list
-  } else {
-    console.warn(
-      '[Form-Render4-Vue3-Pro]: transfer component must provide a option list.'
-    )
-  }
-}
 onMounted(() => {
   getOptions()
 })

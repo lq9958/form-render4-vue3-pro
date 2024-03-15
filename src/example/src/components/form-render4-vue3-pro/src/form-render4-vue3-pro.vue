@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-import { watch, ref, provide, reactive, useSlots } from 'vue'
+import { watch, ref, provide, reactive, useSlots, computed } from 'vue'
 import FormRenderItem from './components/form-render-item.vue'
 
 const slots = useSlots()
@@ -81,9 +81,10 @@ const validate = () => {
   })
 }
 
-const computedSpan = (schema) => {
-  if (schema.column) return Math.ceil(24 / schema.column)
-  return Math.ceil(24 / column.value)
+const computedSpan = (field) => {
+  // 如果schema没有column属性，或者column属性值为0时，则使用filed的span值
+  const useSpan = !Object.hasOwn(schema, 'column') || schema.column === 0
+  return useSpan ? field.span || 24 : 24 / schema.column
 }
 
 const reset = (fieldlist) => {
