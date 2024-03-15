@@ -1,3 +1,14 @@
+## v2.0.1 (2024-03-15)
+
+### Code Optimization
+- 删除了内置组件中重复代码
+
+### Feature
+
+- 新增 `divider`内置组件，组件文本可在`props.content`字段中设置。
+- 表单项可单独设置span，当设置了表单column属性时，优先使用column作为表单项的span，当表单不存在column或者column的值为0时，则使用表单项的span值。
+
+
 ## 🎊🎊🎊 v2.0.0 (2024-03-12)
 
 ### Feature
