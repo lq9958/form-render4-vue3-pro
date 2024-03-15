@@ -10,7 +10,6 @@ const formData = inject('form-render-data')
 const props = defineProps({
   schema: Object,
 })
-
 // watch(value, (newVal) => {
 //   formData[filedName] = newVal;
 // });
