@@ -169,3 +169,4 @@ const schema = reactive({
 | cascader          | a-cascader                       |
 | transfer          | a-transfer                       |
 | divider           | a-divider                        |
+| alert             | a-alert                          |
