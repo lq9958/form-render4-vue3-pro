@@ -49,10 +49,11 @@ import FormRenderTimePicker from './widget/timepicker.vue'
 import FormRenderUpload from './widget/upload.vue'
 import FormRenderTransfer from './widget/transfer.vue'
 import FormRenderDivider from './widget/divider.vue'
+import FormRenderAlert from './widget/alert.vue'
 
 import { is } from '../utils/index.js'
 // 不需要使用a-form-item包裹的组件列表
-const noWrapper = ['divider']
+const noWrapper = ['divider', 'alert']
 const componentMap = {
   input: FormRenderInput,
   'input-number': FormRenderInputNumber,
@@ -72,6 +73,7 @@ const componentMap = {
   upload: FormRenderUpload,
   transfer: FormRenderTransfer,
   divider: FormRenderDivider,
+  alert: FormRenderAlert,
 }
 
 const props = defineProps({
