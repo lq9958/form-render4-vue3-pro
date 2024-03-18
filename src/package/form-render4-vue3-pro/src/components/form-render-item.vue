@@ -39,7 +39,7 @@ import FormRenderRadio from './widget/radio.vue'
 import FormRenderRate from './widget/rate.vue'
 import FormRenderSwitch from './widget/switch.vue'
 import FormRenderTextarea from './widget/textarea.vue'
-// @since 2.0.0 新增内置组件
+// @since 2.x.x 新增内置组件
 import FormRenderCascader from './widget/cascader.vue'
 import FormRenderDatePicker from './widget/datepicker.vue'
 import FormRenderDateRangePicker from './widget/date-range-picker.vue'
@@ -49,10 +49,11 @@ import FormRenderTimePicker from './widget/timepicker.vue'
 import FormRenderUpload from './widget/upload.vue'
 import FormRenderTransfer from './widget/transfer.vue'
 import FormRenderDivider from './widget/divider.vue'
-
+import FormRenderAlert from './widget/alert.vue'
 import { is } from '../utils/index.js'
+
 // 不需要使用a-form-item包裹的组件列表
-const noWrapper = ['divider']
+const noWrapper = ['divider', 'alert']
 const componentMap = {
   input: FormRenderInput,
   'input-number': FormRenderInputNumber,
@@ -72,6 +73,7 @@ const componentMap = {
   upload: FormRenderUpload,
   transfer: FormRenderTransfer,
   divider: FormRenderDivider,
+  alert: FormRenderAlert,
 }
 
 const props = defineProps({
