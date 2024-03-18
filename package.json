@@ -1,7 +1,7 @@
 {
   "name": "form-render4-vue3-pro",
   "author": "lq9958",
-  "version": "2.1.0",
+  "version": "2.1.2",
   "description": "A form render for vue3, base on arco-design.",
   "main": "src/package/form-render4-vue3-pro/index.js",
   "type": "module",
