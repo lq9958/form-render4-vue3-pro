@@ -1,5 +1,5 @@
 <template>
-  <a-alert v-bind="attrs" style="margin: 8px 0"></a-alert>
+  <a-alert v-bind="attrs" style="margin: 8px 0">{{ attrs.content }}</a-alert>
 </template>
 
 <script setup>

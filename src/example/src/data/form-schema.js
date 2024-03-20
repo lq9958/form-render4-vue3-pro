@@ -10,9 +10,10 @@ export const SIMPLEFORM = {
     {
       type: "alert",
       props: {
-        title: '这是警告内容',
+        title: '这是警告标题',
         type: 'warning',
-        banner: true
+        banner: true,
+        content: '这是警告内容',
       },
     }, {
       type: "input",
