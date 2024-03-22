@@ -135,17 +135,18 @@ const schema = reactive({
 
 ### fields 字段描述
 
-| 字段名称 | 类型    | Description                                            | 是否必须 |
-| -------- | ------- | ------------------------------------------------------ | -------- |
-| type     | String  | 指定生成对应 arco-design 的组件，对应关系见下表 type   | Yes      |
-| gutter   | Number  | 用与表单项之间的间隔 ，该项不设置会自动取全局的 gutter | No       |
-| title    | String  | 表单项的名称                                           | Yes      |
-| field    | String  | 表单项字段                                             | Yes      |
-| value    | any     | 该表表单项的值                                         | No       |
-| props    | Object  | 生成最终组件的 props 项，对应 arco-design 组件的 props | No       |
-| span     | Number  | 该表单项独占多少列，宽度计算公式为 24/span             | No       |
-| show     | Boolean | 控制表单项显示与否，默认为：true                       | No       |
-| config   | Object  | arco-design `a-form-item`组件配置对象                  | No       |
+| 字段名称 | 类型    | Description                                                                                            | 是否必须 |
+| -------- | ------- | ------------------------------------------------------------------------------------------------------ | -------- |
+| type     | String  | 指定生成对应 arco-design 的组件，对应关系见下表 type                                                   | Yes      |
+| gutter   | Number  | 用与表单项之间的间隔 ，该项不设置会自动取全局的 gutter                                                 | No       |
+| title    | String  | 表单项的名称                                                                                           | Yes      |
+| field    | String  | 表单项绑定的字段                                                                                       | Yes      |
+| value    | any     | 该表表单项的值                                                                                         | No       |
+| props    | Object  | 生成最终组件的 props 项，对应 arco-design 组件的 props                                                 | No       |
+| span     | Number  | 该表单项独占的栅格数（默认为 24）                                                                      | No       |
+| show     | Boolean | 控制表单项显示与否，默认为：true                                                                       | No       |
+| config   | Object  | `a-form-item`组件配置对象，字段参考[`a-form-item`](https://arco.design/vue/component/form#API)组件属性 | No       |
+| children | Array   | 嵌套表单项                                                                                             | No       |
 
 ## 当前支持的组件
 
