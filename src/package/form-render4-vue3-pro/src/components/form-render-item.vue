@@ -105,7 +105,7 @@ const getSpan = (child) => {
   return 24
 }
 
-const children = isFormItem.value ? schema.children.items : []
+const children = isFormItem.value ? schema.children : []
 </script>
 
 <script>
