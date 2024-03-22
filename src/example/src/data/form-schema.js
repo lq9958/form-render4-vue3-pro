@@ -15,7 +15,8 @@ export const SIMPLEFORM = {
         banner: true,
         content: '这是警告内容',
       },
-    }, {
+    },
+    {
       type: "input",
       field: "name",
       title: "姓名",
@@ -53,7 +54,6 @@ export const SIMPLEFORM = {
         max: 300
       },
     },
-
     {
       type: "divider",
       props: { direction: 'horizontal', content: '个人经历' },
@@ -116,177 +116,175 @@ export const SIMPLEFORM = {
       value: 10,
       props: {},
       gutter: 24,
-      children: {
-        items: [
-          {
-            type: "rate",
-            field: "rate2",
-            title: "评分",
-            value: 10,
-            span: 12,
-            config: {
-              rules: [{
-                required: true,
-                message: '评分必选'
-              }, {
-                validator: (value, callback) => {
-                  if (value < 5) {
-                    callback("评分不能低于5颗星");
-                  }
-                },
-                trigger: "blur",
-              },]
-            },
-            props: {},
+      children: [
+        {
+          type: "rate",
+          field: "rate2",
+          title: "评分",
+          value: 10,
+          span: 12,
+          config: {
+            rules: [{
+              required: true,
+              message: '评分必选'
+            }, {
+              validator: (value, callback) => {
+                if (value < 5) {
+                  callback("评分不能低于5颗星");
+                }
+              },
+              trigger: "blur",
+            },]
           },
-          {
-            type: "date-picker",
-            field: "datepicker",
-            title: "日期",
-            value: 10,
-            span: 12,
-            config: {
-              rules: [{
-                required: true,
-                message: '日期必选'
-              }]
-            },
-            props: {},
+          props: {},
+        },
+        {
+          type: "date-picker",
+          field: "datepicker",
+          title: "日期",
+          value: 10,
+          span: 12,
+          config: {
+            rules: [{
+              required: true,
+              message: '日期必选'
+            }]
           },
-          {
-            type: "tree-select",
-            field: "treeselect",
-            title: "选择树",
-            value: 10,
-            span: 12,
-            config: {
-              rules: [{
-                required: true,
-                message: '选择树'
-              }],
-            },
-            props: {}
+          props: {},
+        },
+        {
+          type: "tree-select",
+          field: "treeselect",
+          title: "选择树",
+          value: 10,
+          span: 12,
+          config: {
+            rules: [{
+              required: true,
+              message: '选择树'
+            }],
           },
-          {
-            type: "cascader",
-            field: "cascader",
-            title: "级联选择器",
-            value: 10,
-            span: 12,
-            config: {
-              rules: [{
-                required: true,
-                message: '级联选择器必选'
-              }]
-            },
-            props: {}
+          props: {}
+        },
+        {
+          type: "cascader",
+          field: "cascader",
+          title: "级联选择器",
+          value: 10,
+          span: 12,
+          config: {
+            rules: [{
+              required: true,
+              message: '级联选择器必选'
+            }]
           },
-          {
-            type: "upload",
-            field: "upload",
-            title: "文件传输",
-            value: 10,
-            span: 12,
-            props: {
-              draggable: true,
-              autoUpload: false
-            },
+          props: {}
+        },
+        {
+          type: "upload",
+          field: "upload",
+          title: "文件传输",
+          value: 10,
+          span: 12,
+          props: {
+            draggable: true,
+            autoUpload: false
           },
-          {
-            type: "transfer",
-            field: "transfer",
-            title: "穿梭框",
-            value: 10,
-            span: 12,
-            props: {
-            },
+        },
+        {
+          type: "transfer",
+          field: "transfer",
+          title: "穿梭框",
+          value: 10,
+          span: 12,
+          props: {
           },
-          {
-            type: "verification-code",
-            field: "verificationcode",
-            title: "验证码",
-            value: 10,
-            span: 12,
-            config: {
-              rules: [{
-                required: true,
-                message: '验证码'
-              }]
-            },
-            props: {},
+        },
+        {
+          type: "verification-code",
+          field: "verificationcode",
+          title: "验证码",
+          value: 10,
+          span: 12,
+          config: {
+            rules: [{
+              required: true,
+              message: '验证码'
+            }]
           },
-          {
-            type: "time-picker",
-            field: "timepicker",
-            title: "时间选择",
-            value: 10,
-            span: 12,
-            config: {
-              rules: [{
-                required: true,
-                message: '时间选择'
-              }]
-            },
-            props: {},
+          props: {},
+        },
+        {
+          type: "time-picker",
+          field: "timepicker",
+          title: "时间选择",
+          value: 10,
+          span: 12,
+          config: {
+            rules: [{
+              required: true,
+              message: '时间选择'
+            }]
           },
-          {
-            type: "date-range-picker",
-            field: "daterangepicker",
-            title: "日期范围",
-            value: 10,
-            span: 12,
-            config: {
-              rules: [{
-                required: true,
-                message: '日期必选'
-              }]
-            },
-            props: {},
+          props: {},
+        },
+        {
+          type: "date-range-picker",
+          field: "daterangepicker",
+          title: "日期范围",
+          value: 10,
+          span: 12,
+          config: {
+            rules: [{
+              required: true,
+              message: '日期必选'
+            }]
           },
+          props: {},
+        },
 
-          {
-            type: "select",
-            field: "like2",
-            title: "爱好",
-            value: "rap",
-            span: 12,
-            config: {
-              rules: [{
-                validator: (value, callback) => {
-                  if (value < 3) {
-                    callback("评分不能低于3颗星");
-                  }
-                },
-                trigger: "blur",
-              },]
-            },
-            data: {
-              list: [{
-                value: "song",
-                label: "唱"
+        {
+          type: "select",
+          field: "like2",
+          title: "爱好",
+          value: "rap",
+          span: 12,
+          config: {
+            rules: [{
+              validator: (value, callback) => {
+                if (value < 3) {
+                  callback("评分不能低于3颗星");
+                }
               },
-              {
-                value: "dance",
-                label: "跳"
-              },
-              {
-                value: "rap",
-                label: "rap"
-              },
-              {
-                value: "basketball",
-                label: "篮球"
-              },
-              ],
-              key: "value",
-            },
-            props: {
-              allowClear: true,
-
-            },
+              trigger: "blur",
+            },]
           },
-        ],
-      },
+          data: {
+            list: [{
+              value: "song",
+              label: "唱"
+            },
+            {
+              value: "dance",
+              label: "跳"
+            },
+            {
+              value: "rap",
+              label: "rap"
+            },
+            {
+              value: "basketball",
+              label: "篮球"
+            },
+            ],
+            key: "value",
+          },
+          props: {
+            allowClear: true,
+
+          },
+        },
+      ],
     },
     {
       type: "select",
