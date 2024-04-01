@@ -10,8 +10,10 @@
 
 <script setup>
 import { inject, reactive } from 'vue'
+import { composeWatcher } from '../../utils/watcher'
 
 const formData = inject('form-render-data')
+const globalSchema = inject('form-render-schema')
 const props = defineProps({
   schema: Object,
 })
@@ -19,6 +21,8 @@ const props = defineProps({
 const schema = reactive(props.schema)
 const filedName = schema.field
 const attrs = schema.props || {}
+
+composeWatcher(filedName.value, schema.watcher, globalSchema, formData)
 </script>
 
 <script>

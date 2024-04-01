@@ -11,12 +11,28 @@ export const getPathValue = (data, path) => {
 }
 
 
-export const requestData = async (url, method, params, path) => {
+const composeParams = (params) => {
+  const result = {}
+  params.forEach(param => {
+    result[param.key] = param.value
+  })
+  return result
+}
+/**
+ * 
+ * @param {string} url 
+ * @param {'get'|'post'} method 
+ * @param {any} params 
+ * @param {url} path 
+ * @returns 
+ */
+export const requestData = async (url, method, params, dataPath) => {
+  params = composeParams(params)
   const response = await axios({
     url,
     method,
     params: method === "get" ? params : {},
     data: method !== "get" ? params : {},
   })
-  return getPathValue(response.data, path)
+  return getPathValue(response.data, dataPath)
 }

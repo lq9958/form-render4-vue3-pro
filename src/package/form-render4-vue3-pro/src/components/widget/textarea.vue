@@ -3,20 +3,23 @@
 </template>
 
 <script setup>
-  import { inject, reactive } from 'vue';
+import { inject, reactive, ref } from 'vue'
+import { composeWatcher } from '../../utils/watcher'
+const formData = inject('form-render-data')
+const globalSchema = inject('form-render-schema')
+const props = defineProps({
+  schema: Object,
+})
 
-  const formData = inject('form-render-data');
-  const props = defineProps({
-    schema: Object,
-  });
+const schema = reactive(props.schema)
+const filedName = ref(schema.field)
+const attrs = schema.props || {}
 
-  const schema = reactive(props.schema);
-  const filedName = schema.field;
-  const attrs = schema.props || {};
+composeWatcher(filedName.value, schema.watcher, globalSchema, formData)
 </script>
 
 <script>
-  export default {
-    name: 'FormRenderTextarea',
-  };
+export default {
+  name: 'FormRenderTextarea',
+}
 </script>

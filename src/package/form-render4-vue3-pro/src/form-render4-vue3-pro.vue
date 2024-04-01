@@ -1,5 +1,5 @@
 <template>
-  <div class="form-render" :style="{ width: '100%' }">
+  <div class="form-render">
     <a-form ref="formInstance" :model="formData" v-bind="formProps">
       <a-row :gutter="gutter">
         <a-col
@@ -115,3 +115,9 @@ export default {
   name: 'FormRender4Vue3Pro',
 }
 </script>
+
+<style scoped>
+.form-render {
+  width: 100%;
+}
+</style>

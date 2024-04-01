@@ -1,7 +1,7 @@
 <template>
   <!-- 表单项外元素 -->
   <component
-    v-if="noWrapper.includes(type)"
+    v-if="noWrapper.includes(type) && schema.show"
     :is="componentMap[type]"
     :schema="schema"
   />
@@ -10,7 +10,7 @@
     :field="schema.field"
     :label="schema.title"
     v-bind="schema.config || {}"
-    v-else
+    v-else-if="schema.show"
   >
     <div v-if="isFormItem">
       <a-row :gutter="gutter">
@@ -39,7 +39,7 @@ import FormRenderRadio from './widget/radio.vue'
 import FormRenderRate from './widget/rate.vue'
 import FormRenderSwitch from './widget/switch.vue'
 import FormRenderTextarea from './widget/textarea.vue'
-// @since 2.x.x 新增内置组件
+// @since 2.0.0 新增内置组件
 import FormRenderCascader from './widget/cascader.vue'
 import FormRenderDatePicker from './widget/datepicker.vue'
 import FormRenderDateRangePicker from './widget/date-range-picker.vue'
@@ -50,8 +50,8 @@ import FormRenderUpload from './widget/upload.vue'
 import FormRenderTransfer from './widget/transfer.vue'
 import FormRenderDivider from './widget/divider.vue'
 import FormRenderAlert from './widget/alert.vue'
-import { is } from '../utils/index.js'
 
+import { is } from '../utils/index.js'
 // 不需要使用a-form-item包裹的组件列表
 const noWrapper = ['divider', 'alert']
 const componentMap = {
