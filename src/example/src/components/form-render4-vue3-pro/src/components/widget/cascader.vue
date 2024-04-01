@@ -10,27 +10,31 @@
 </template>
 
 <script setup>
-import { inject, reactive, watch, onMounted } from 'vue'
+import { inject, reactive, watch, ref } from 'vue'
 import useOptionData from '../hooks'
+import { getEventBus } from '../../utils/eventemitter'
+import { composeWatcher } from '../../utils/watcher'
 
+const emitter = getEventBus()
 const props = defineProps({
   schema: Object,
 })
 const schema = reactive(props.schema)
-
-const { optionData, getOptions, options } = useOptionData(schema)
+const attrs = schema.props || {}
 const formData = inject('form-render-data')
 
-const filedName = schema.field
-const attrs = schema.props || {}
+const { optionData, setOptions, options, globalSchema } = useOptionData(schema)
 
-onMounted(() => {
-  getOptions()
-})
+const filedName = ref(schema.field)
 
+setOptions()
+
+emitter.on(`${filedName.value}`, setOptions)
 watch(optionData, () => {
-  getOptions()
+  setOptions()
 })
+
+composeWatcher(filedName.value, schema.watcher, globalSchema, formData)
 </script>
 
 <script>

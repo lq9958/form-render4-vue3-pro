@@ -27,6 +27,8 @@
   ],
   "dependencies": {
     "@arco-design/web-vue": "^2.54.6",
+    "axios": "^1.6.8",
+    "mitt": "^3.0.1",
     "vue": "^3.2.47"
   },
   "devDependencies": {

@@ -8,6 +8,7 @@ import { reactive } from 'vue'
 const props = defineProps({
   schema: Object,
 })
+
 const schema = reactive(props.schema)
 
 const attrs = schema.props || {}

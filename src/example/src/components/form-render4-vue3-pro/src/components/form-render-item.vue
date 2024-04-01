@@ -1,7 +1,7 @@
 <template>
   <!-- 表单项外元素 -->
   <component
-    v-if="noWrapper.includes(type)"
+    v-if="noWrapper.includes(type) && schema.show"
     :is="componentMap[type]"
     :schema="schema"
   />
@@ -10,7 +10,7 @@
     :field="schema.field"
     :label="schema.title"
     v-bind="schema.config || {}"
-    v-else
+    v-else-if="schema.show"
   >
     <div v-if="isFormItem">
       <a-row :gutter="gutter">
@@ -85,7 +85,7 @@ const schema = reactive(props.schema)
 // @since 2.0.0 新增guuter属性，用于控制表单栅栏间隔
 const gutter = ref(schema.gutter || globalSchema.gutter || 8)
 const type = ref(schema.type)
-console.log(type.value)
+
 const isFormItem = computed(() => schema.type === 'form-item')
 const getSpan = (child) => {
   // 如果当前表单项是form-item，则取子项的span值

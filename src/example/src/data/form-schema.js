@@ -9,6 +9,7 @@ export const SIMPLEFORM = {
   fields: [
     {
       type: "alert",
+      show: true,
       props: {
         title: '这是警告标题',
         type: 'warning',
@@ -40,13 +41,58 @@ export const SIMPLEFORM = {
         },
         ],
       },
-      props: {
-
-      },
+      watcher: [
+        {
+          "triggerType": {
+            "type": "expression",
+            "expression": [],
+            "regExp": ["/.*(敏感词).*/"]
+          },
+          "event": {
+            "hidden": [
+              "like",
+              "like2"
+            ],
+            "show": [],
+            "disable": [
+              "age"
+            ],
+            "enable": [],
+            "required": [
+              "radio"
+            ],
+            "optional": [
+              "name",
+              "verificationcode",
+              "experience"
+            ],
+            "update": [
+              {
+                "key": "name",
+                "value": "111",
+                "type": "string"
+              },
+              {
+                "key": "height",
+                "value": "150",
+                "type": "number"
+              },
+              {
+                "key": "Information",
+                "value": "false",
+                "type": "boolean"
+              }
+            ],
+            "dataUpdate": ["radio"]
+          }
+        },
+      ],
+      props: {},
     },
     {
       type: "slider",
       field: "height",
+      show: true,
       title: "身高(cm)",
       value: 170,
       span: 12,
@@ -56,10 +102,12 @@ export const SIMPLEFORM = {
     },
     {
       type: "divider",
+      show: true,
       props: { direction: 'horizontal', content: '个人经历' },
     },
     {
       type: "input-number",
+      show: true,
       field: "experience",
       title: "工作时长(年)",
       config: {
@@ -77,40 +125,100 @@ export const SIMPLEFORM = {
         }
         ]
       },
+      watcher: [
+        {
+          "triggerType": {
+            "type": "expression",
+            "expression": [
+              {
+                "expression": ">",
+                "conditionValue": "2"
+
+              },
+
+            ],
+            "regExp": []
+          },
+          "event": {
+            "hidden": [
+              "like",
+              "like2"
+            ],
+            "show": [],
+            "disable": [
+              "age"
+            ],
+            "enable": [],
+            "required": [
+              "radio"
+            ],
+            "optional": [
+              "name",
+              "verificationcode",
+              "experience"
+            ],
+            "update": [
+              {
+                "key": "name",
+                "value": "111",
+                "type": "string"
+              },
+              {
+                "key": "height",
+                "value": "150",
+                "type": "number"
+              },
+              {
+                "key": "Information",
+                "value": "false",
+                "type": "boolean"
+              }
+            ],
+            "dataUpdate": ["radio"]
+          }
+        },
+      ],
       props: {
         setp: 0.5,
         precision: 1,
-        max: 2.5,
+        max: 10,
         min: 0,
         mode: 'button',
-
       },
     },
     {
       type: "rate",
       field: "rate",
+      show: true,
       title: "评分",
       value: 10,
       config: {
         rules: [{
           required: true,
-          message: '评分必选'
+          message: '评分必选',
         }, {
           validator: (value, callback) => {
-            if (value < 5) {
-              callback("评分不能低于5颗星");
+            if (value < 3) {
+              callback("评分不能低于3颗星");
             }
           },
-          trigger: "blur",
-        },]
+        },
+        {
+          validator: (value, callback) => {
+            if (value % 2 == 0) {
+              callback("评分必须为奇数");
+            }
+          },
+        },
+        ]
       },
       props: {
-
+        count: 10
       },
     },
-
     {
       type: "form-item",
+      show: true,
       field: "childItem",
       title: "嵌套表单",
       value: 10,
@@ -119,6 +227,7 @@ export const SIMPLEFORM = {
       children: [
         {
           type: "rate",
+          show: true,
           field: "rate2",
           title: "评分",
           value: 10,
@@ -140,6 +249,7 @@ export const SIMPLEFORM = {
         },
         {
           type: "date-picker",
+          show: true,
           field: "datepicker",
           title: "日期",
           value: 10,
@@ -153,6 +263,8 @@ export const SIMPLEFORM = {
           props: {},
         },
         {
+          show: true,
+          datasource: { type: 'local' },
           type: "tree-select",
           field: "treeselect",
           title: "选择树",
@@ -167,6 +279,8 @@ export const SIMPLEFORM = {
           props: {}
         },
         {
+          show: true,
+          datasource: { type: 'local' },
           type: "cascader",
           field: "cascader",
           title: "级联选择器",
@@ -181,6 +295,7 @@ export const SIMPLEFORM = {
           props: {}
         },
         {
+          show: true,
           type: "upload",
           field: "upload",
           title: "文件传输",
@@ -192,6 +307,8 @@ export const SIMPLEFORM = {
           },
         },
         {
+          show: true,
+          datasource: { type: 'local' },
           type: "transfer",
           field: "transfer",
           title: "穿梭框",
@@ -201,6 +318,7 @@ export const SIMPLEFORM = {
           },
         },
         {
+          show: true,
           type: "verification-code",
           field: "verificationcode",
           title: "验证码",
@@ -215,6 +333,7 @@ export const SIMPLEFORM = {
           props: {},
         },
         {
+          show: true,
           type: "time-picker",
           field: "timepicker",
           title: "时间选择",
@@ -229,6 +348,7 @@ export const SIMPLEFORM = {
           props: {},
         },
         {
+          show: true,
           type: "date-range-picker",
           field: "daterangepicker",
           title: "日期范围",
@@ -244,23 +364,10 @@ export const SIMPLEFORM = {
         },
 
         {
-          type: "select",
-          field: "like2",
-          title: "爱好",
-          value: "rap",
-          span: 12,
-          config: {
-            rules: [{
-              validator: (value, callback) => {
-                if (value < 3) {
-                  callback("评分不能低于3颗星");
-                }
-              },
-              trigger: "blur",
-            },]
-          },
-          data: {
-            list: [{
+          show: true,
+          datasource: {
+            type: 'provide',
+            data: [{
               value: "song",
               label: "唱"
             },
@@ -276,8 +383,23 @@ export const SIMPLEFORM = {
               value: "basketball",
               label: "篮球"
             },
-            ],
-            key: "value",
+            ]
+          },
+
+          type: "select",
+          field: "like2",
+          title: "爱好",
+          value: "rap",
+          span: 12,
+          config: {
+            rules: [{
+              validator: (value, callback) => {
+                if (value < 3) {
+                  callback("评分不能低于3颗星");
+                }
+              },
+              trigger: "blur",
+            },]
           },
           props: {
             allowClear: true,
@@ -287,12 +409,38 @@ export const SIMPLEFORM = {
       ],
     },
     {
+      show: true,
+      datasource: {
+        type: 'provide',
+        data: [{
+          value: "song",
+          label: "唱"
+        },
+        {
+          value: "dance",
+          label: "跳"
+        },
+        {
+          value: "rap",
+          label: "rap"
+        },
+        {
+          value: "basketball",
+          label: "篮球"
+        },
+        ]
+      },
       type: "select",
       field: "like",
       title: "爱好",
       value: "rap",
-      data: {
-        list: [{
+      props: {},
+    },
+    {
+      show: true,
+      datasource: {
+        type: 'provide',
+        data: [{
           value: "song",
           label: "唱"
         },
@@ -309,62 +457,26 @@ export const SIMPLEFORM = {
           label: "篮球"
         },
         ],
-        key: "value",
       },
-      props: {},
-    },
-    {
       type: "radio",
       field: "radio",
-      title: "单选",
+      title: "单选按钮",
       value: "rap",
-      data: {
-        list: [{
-          value: "song",
-          label: "唱"
-        },
-        {
-          value: "dance",
-          label: "跳"
-        },
-        {
-          value: "rap",
-          label: "rap"
-        },
-        {
-          value: "basketball",
-          label: "篮球"
-        },
-        ],
-        key: "value",
-      },
       props: {},
+      config: {
+        rules: [{
+          required: false,
+          message: "单选按钮为必填项"
+        },]
+      }
     },
     {
+      show: true,
+      datasource: { type: 'local' },
       type: "checkbox",
       field: "checkbox",
       title: "复选",
       value: "rap",
-      // data: {
-      //   list: [{
-      //       value: "song",
-      //       label: "唱"
-      //     },
-      //     {
-      //       value: "dance",
-      //       label: "跳"
-      //     },
-      //     {
-      //       value: "rap",
-      //       label: "rap"
-      //     },
-      //     {
-      //       value: "basketball",
-      //       label: "篮球"
-      //     },
-      //   ],
-      //   key: "value",
-      // },
       props: {},
     },
     // {
@@ -374,6 +486,7 @@ export const SIMPLEFORM = {
     //   value: [],
     // },
     {
+      show: true,
       type: "switch",
       field: "Information",
       title: "信息公开",
@@ -390,6 +503,7 @@ export const SIMPLEFORM = {
       props: {},
     },
     {
+      show: true,
       field: 'slot',
       title: '自定义表单项',
     }
