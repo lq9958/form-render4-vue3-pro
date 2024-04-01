@@ -115,6 +115,69 @@ const staticData = [
   },
 ]
 const optionData = reactive({
+  radio: {
+    list: [
+      {
+        value: 'song',
+        label: '唱',
+      },
+      {
+        value: 'dance',
+        label: '跳',
+      },
+      {
+        value: 'rap',
+        label: 'rap',
+      },
+      {
+        value: 'basketball',
+        label: '篮球',
+      },
+    ],
+    key: 'value',
+  },
+  like: {
+    list: [
+      {
+        value: 'song',
+        label: '唱',
+      },
+      {
+        value: 'dance',
+        label: '跳',
+      },
+      {
+        value: 'rap',
+        label: 'rap',
+      },
+      {
+        value: 'basketball',
+        label: '篮球',
+      },
+    ],
+    key: 'value',
+  },
+  like2: {
+    list: [
+      {
+        value: 'song',
+        label: '唱',
+      },
+      {
+        value: 'dance',
+        label: '跳',
+      },
+      {
+        value: 'rap',
+        label: 'rap',
+      },
+      {
+        value: 'basketball',
+        label: '篮球',
+      },
+    ],
+    key: 'value',
+  },
   checkbox: {
     list: staticData,
     key: 'value',
