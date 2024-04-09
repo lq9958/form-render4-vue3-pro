@@ -134,7 +134,6 @@ const optionData = reactive({
         label: '篮球',
       },
     ],
-    key: 'value',
   },
   like: {
     list: [
@@ -155,7 +154,6 @@ const optionData = reactive({
         label: '篮球',
       },
     ],
-    key: 'value',
   },
   like2: {
     list: [
@@ -176,11 +174,9 @@ const optionData = reactive({
         label: '篮球',
       },
     ],
-    key: 'value',
   },
   checkbox: {
     list: staticData,
-    key: 'value',
   },
   cascader: {
     list: [
@@ -233,7 +229,6 @@ const optionData = reactive({
         ],
       },
     ],
-    key: 'value',
   },
   treeselect: {
     list: [
@@ -262,11 +257,9 @@ const optionData = reactive({
         ],
       },
     ],
-    key: 'key',
   },
   transfer: {
     list: staticData,
-    key: 'value',
   },
 })
 

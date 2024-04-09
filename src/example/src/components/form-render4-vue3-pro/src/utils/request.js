@@ -5,13 +5,18 @@ export const getPathValue = (data, path) => {
   let ret = data
   const paths = path.split(".");
   paths.forEach(path => {
-    ret = ret[path];
+    const matchRet = path.match(/(.*)\[(\d+)\]$/)
+    if (matchRet) {
+      ret = ret[matchRet[1]][Number(matchRet[2])]
+    } else {
+      ret = ret[path];
+    }
   });
   return ret
 }
 
 
-const composeParams = (params) => {
+export const composeParams = (params) => {
   const result = {}
   params.forEach(param => {
     result[param.key] = param.value

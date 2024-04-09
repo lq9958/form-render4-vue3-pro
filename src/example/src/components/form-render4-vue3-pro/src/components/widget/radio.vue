@@ -12,18 +12,18 @@
 </template>
 
 <script setup>
-import { inject, ref, reactive, watch } from 'vue'
-import useOptionData from '../hooks'
-import { getEventBus } from '../../utils/eventemitter'
-import { composeWatcher } from '../../utils/watcher'
+import { inject, ref, reactive, watch } from 'vue';
+import useOptionData from '../hooks';
+import { getEventBus } from '../../utils/eventemitter';
+import { composeWatcher } from '../../utils/watcher';
 
-const emitter = getEventBus()
+const emitter = getEventBus();
 const props = defineProps({
   schema: Object,
-})
-const schema = reactive(props.schema)
-const formData = inject('form-render-data')
-const attrs = schema.props || {}
+});
+const schema = reactive(props.schema);
+const formData = inject('form-render-data');
+const attrs = schema.props || {};
 
 const {
   optionData,
@@ -32,40 +32,24 @@ const {
   optionLabel,
   optionValue,
   globalSchema,
-} = useOptionData(schema)
+} = useOptionData(schema);
 
-const filedName = ref(schema.field)
+const filedName = ref(schema.field);
 
-setOptions()
+setOptions();
 emitter.on(`${filedName.value}`, () => {
-  options.value = reactive([
-    {
-      value: 'song',
-      label: '唱111',
-    },
-    {
-      value: 'dance',
-      label: '跳222',
-    },
-    {
-      value: 'rap',
-      label: 'rap333',
-    },
-    {
-      value: 'basketball',
-      label: '篮球444',
-    },
-  ])
-})
+  formData[filedName.value] = '';
+  setOptions();
+});
 watch(optionData, () => {
-  setOptions()
-})
+  setOptions();
+});
 
-composeWatcher(filedName.value, schema.watcher, globalSchema, formData)
+composeWatcher(filedName.value, schema.watcher, globalSchema, formData);
 </script>
 
 <script>
 export default {
   name: 'FormRenderRadio',
-}
+};
 </script>

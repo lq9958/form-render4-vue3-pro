@@ -1,7 +1,7 @@
 <template>
   <!-- 表单项外元素 -->
   <component
-    v-if="noWrapper.includes(type) && schema.show"
+    v-if="noWrapper.includes(type) && isShowFormItem(schema)"
     :is="componentMap[type]"
     :schema="schema"
   />
@@ -10,7 +10,7 @@
     :field="schema.field"
     :label="schema.title"
     v-bind="schema.config || {}"
-    v-else-if="schema.show"
+    v-else-if="isShowFormItem(schema)"
   >
     <div v-if="isFormItem">
       <a-row :gutter="gutter">
@@ -50,6 +50,7 @@ import FormRenderUpload from './widget/upload.vue'
 import FormRenderTransfer from './widget/transfer.vue'
 import FormRenderDivider from './widget/divider.vue'
 import FormRenderAlert from './widget/alert.vue'
+import FormRenderColorPicker from './widget/color-picker.vue'
 
 import { is } from '../utils/index.js'
 // 不需要使用a-form-item包裹的组件列表
@@ -74,6 +75,7 @@ const componentMap = {
   transfer: FormRenderTransfer,
   divider: FormRenderDivider,
   alert: FormRenderAlert,
+  'color-picker': FormRenderColorPicker,
 }
 
 const props = defineProps({
@@ -103,6 +105,14 @@ const getSpan = (child) => {
     }
   }
   return 24
+}
+
+const isShowFormItem = (schema) => {
+  if (!Object.hasOwn(schema, 'show')) {
+    return true
+  } else {
+    return schema.show
+  }
 }
 
 const children = isFormItem.value ? schema.children : []
