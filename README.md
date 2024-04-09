@@ -6,15 +6,16 @@
 
 [在线演示](https://lq9958.github.io/)
 
-## [💎 更新日志(v2.0.0 发布啦！！！)](./CHANGELOG.MD)
-
-## 数据项说明
-
-~~组件的 item 项目前的优先级为 optionData > schema.data 组件会优先在 optionData 中查找该字段的数据源。如果未提供，组件将尝试在 schema 的 data 字段中获取数据源，如果均为提供组件将会抛出异常。~~
-
-自 v1.3.0 起，不再支持在 Schema 中装载数据，组件只会在 option-data 中查找需要的字段。
+## [💎 更新日志](./CHANGELOG.MD)
 
 ## 🌈 如何使用
+
+### V3.x 版本现已发布，支持加载远程数据源，支持自定义数据源
+
+```
+npm install form-render4-vue3-pro@next --save
+```
+
 
 ### 安装
 
