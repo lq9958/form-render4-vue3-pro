@@ -1,18 +1,11 @@
 <template>
-  <a-space>
-    <a-upload
-      v-model:file-list="formData[filedName]"
-      v-bind="attrs"
-      :style="{
-        width: '100%',
-      }"
-    ></a-upload>
-  </a-space>
+  <a-color-picker v-model="formData[filedName]" v-bind="attrs"></a-color-picker>
 </template>
 
 <script setup>
-import { inject, reactive } from 'vue'
+import { inject, reactive, ref } from 'vue'
 import { composeWatcher } from '../../utils/watcher'
+
 const formData = inject('form-render-data')
 const globalSchema = inject('form-render-schema')
 const props = defineProps({
@@ -20,7 +13,7 @@ const props = defineProps({
 })
 
 const schema = reactive(props.schema)
-const filedName = schema.field
+const filedName = ref(schema.field)
 const attrs = schema.props || {}
 
 composeWatcher(filedName.value, schema.watcher, globalSchema, formData)
@@ -28,6 +21,6 @@ composeWatcher(filedName.value, schema.watcher, globalSchema, formData)
 
 <script>
 export default {
-  name: 'FormRenderUpload',
+  name: 'FormRenderRate',
 }
 </script>

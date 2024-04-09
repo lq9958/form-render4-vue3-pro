@@ -1,42 +1,44 @@
 <template>
-  <a-select v-model="formData[`${filedName}`]" v-bind="attrs">
+  <a-select v-model="formData[filedName]" v-bind="attrs">
     <a-option
-      v-for="item in options"
-      :key="getKey(item)"
-      :label="getLabel(item)"
-      :value="getValue(item)"
+      v-for="(item, index) in options"
+      :key="index"
+      :label="item[optionLabel]"
+      :value="item[optionValue]"
     ></a-option>
   </a-select>
 </template>
 
 <script setup>
-import { inject, ref, onMounted, reactive, watch } from 'vue'
-import useOptionData from '../hooks'
+import { inject, ref, reactive } from 'vue';
+import useOptionData from '../hooks';
+import { getEventBus } from '../../utils/eventemitter';
+import { composeWatcher } from '../../utils/watcher';
 
+const emitter = getEventBus();
 const props = defineProps({
   schema: Object,
-})
-const schema = reactive(props.schema)
+});
+const schema = reactive(props.schema);
+const attrs = schema.props || {};
 
-const { optionData, getOptions, options, getKey, getLabel, getValue } =
-  useOptionData(schema)
-const formData = inject('form-render-data')
+const formData = inject('form-render-data');
+const { setOptions, options, optionLabel, optionValue, globalSchema } =
+  useOptionData(schema);
 
-const filedName = ref(schema.field)
+const filedName = ref(schema.field);
+setOptions();
 
-onMounted(() => {
-  getOptions()
-})
+emitter.on(`${filedName.value}`, () => {
+  formData[filedName.value] = '';
+  setOptions();
+});
 
-watch(optionData, () => {
-  getOptions()
-})
-
-const attrs = schema.props || {}
+composeWatcher(filedName.value, schema.watcher, globalSchema, formData);
 </script>
 
 <script>
 export default {
   name: 'FormRenderSelect',
-}
+};
 </script>

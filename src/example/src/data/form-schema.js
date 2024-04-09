@@ -18,6 +18,16 @@ export const SIMPLEFORM = {
       },
     },
     {
+      type: "color-picker",
+      title: '颜色选择',
+      show: true,
+      props: {
+        format: 'rgb',
+        showText: true,
+        showHistory: true
+      },
+    },
+    {
       type: "input",
       field: "name",
       title: "姓名",
@@ -41,52 +51,6 @@ export const SIMPLEFORM = {
         },
         ],
       },
-      watcher: [
-        {
-          "triggerType": {
-            "type": "expression",
-            "expression": [],
-            "regExp": ["/.*(敏感词).*/"]
-          },
-          "event": {
-            "hidden": [
-              "like",
-              "like2"
-            ],
-            "show": [],
-            "disable": [
-              "age"
-            ],
-            "enable": [],
-            "required": [
-              "radio"
-            ],
-            "optional": [
-              "name",
-              "verificationcode",
-              "experience"
-            ],
-            "update": [
-              {
-                "key": "name",
-                "value": "111",
-                "type": "string"
-              },
-              {
-                "key": "height",
-                "value": "150",
-                "type": "number"
-              },
-              {
-                "key": "Information",
-                "value": "false",
-                "type": "boolean"
-              }
-            ],
-            "dataUpdate": ["radio"]
-          }
-        },
-      ],
       props: {},
     },
     {
@@ -125,59 +89,6 @@ export const SIMPLEFORM = {
         }
         ]
       },
-      watcher: [
-        {
-          "triggerType": {
-            "type": "expression",
-            "expression": [
-              {
-                "expression": ">",
-                "conditionValue": "2"
-
-              },
-
-            ],
-            "regExp": []
-          },
-          "event": {
-            "hidden": [
-              "like",
-              "like2"
-            ],
-            "show": [],
-            "disable": [
-              "age"
-            ],
-            "enable": [],
-            "required": [
-              "radio"
-            ],
-            "optional": [
-              "name",
-              "verificationcode",
-              "experience"
-            ],
-            "update": [
-              {
-                "key": "name",
-                "value": "111",
-                "type": "string"
-              },
-              {
-                "key": "height",
-                "value": "150",
-                "type": "number"
-              },
-              {
-                "key": "Information",
-                "value": "false",
-                "type": "boolean"
-              }
-            ],
-            "dataUpdate": ["radio"]
-          }
-        },
-      ],
       props: {
         setp: 0.5,
         precision: 1,
@@ -310,9 +221,9 @@ export const SIMPLEFORM = {
           show: true,
           datasource: { type: 'local' },
           type: "transfer",
+          value: [],
           field: "transfer",
           title: "穿梭框",
-          value: 10,
           span: 12,
           props: {
           },
@@ -362,7 +273,6 @@ export const SIMPLEFORM = {
           },
           props: {},
         },
-
         {
           show: true,
           datasource: {
@@ -476,7 +386,7 @@ export const SIMPLEFORM = {
       type: "checkbox",
       field: "checkbox",
       title: "复选",
-      value: "rap",
+      value: ['rap'],
       props: {},
     },
     // {

@@ -1,5 +1,5 @@
 <template>
-  <div class="form-render" :style="{ width: '100%' }">
+  <div class="form-render">
     <a-form ref="formInstance" :model="formData" v-bind="formProps">
       <a-row :gutter="gutter">
         <a-col
@@ -22,7 +22,14 @@
         </a-col>
         <a-col :span="24 / column">
           <a-form-item no-style>
-            <slot name="footer"></slot>
+            <div class="submit_group_btn" v-if="haveSolt({ field: 'footer' })">
+              <slot name="footer"></slot>
+            </div>
+            <!-- <div class="submit_group_btn" v-else>
+              <a-space>
+                <a-button type="primary" @click="submitForm">提交</a-button>
+              </a-space>
+            </div> -->
           </a-form-item>
         </a-col>
       </a-row>
@@ -31,87 +38,98 @@
 </template>
 
 <script setup>
-import { watch, ref, provide, reactive, useSlots, computed } from 'vue'
-import FormRenderItem from './components/form-render-item.vue'
+import { watch, ref, provide, reactive, useSlots, computed } from 'vue';
+import FormRenderItem from './components/form-render-item.vue';
 
-const slots = useSlots()
+const slots = useSlots();
 const props = defineProps({
   modelValue: { type: Object },
   schema: { type: Object },
   optionData: { type: Object },
-})
+});
 
-const formData = reactive(props.modelValue)
-const schema = reactive(props.schema)
+const formData = reactive(props.modelValue);
+const schema = reactive(props.schema);
 watch(formData, (val) => {
-  emit('update:modelValue', val)
-})
-provide('form-render-data', formData)
-provide('form-render-schema', schema)
-provide('form-render-option-data', props.optionData || {})
-const emit = defineEmits(['update:modelValue'])
+  emit('update:modelValue', val);
+});
+provide('form-render-data', formData);
+provide('form-render-schema', schema);
+provide('form-render-option-data', props.optionData || {});
+const emit = defineEmits(['update:modelValue']);
 
-const fields = ref(schema.fields)
-const formProps = ref(schema.props)
+const fields = ref(schema.fields);
+const formProps = ref(schema.props);
 // fix: 修复schema无clomun属性时无法渲染表单的问题
-const column = ref(schema.column || 1)
+const column = ref(schema.column || 1);
 
 // @since 2.0.0 新增guuter属性，用于控制表单栅栏间隔
-const gutter = ref(schema.gutter || 8)
+const gutter = ref(schema.gutter || 8);
 watch(
   () => props.schema,
   (newVal) => {
-    fields.value = newVal.fields
-    formProps.value = newVal.props
+    fields.value = newVal.fields;
+    formProps.value = newVal.props;
   }
-)
+);
 
-const formInstance = ref(null)
+const formInstance = ref(null);
 const validate = () => {
   return new Promise((resolve, reject) => {
     if (formInstance.value) {
       formInstance.value.validate((err) => {
         if (!err) {
-          resolve(true)
+          resolve(true);
         } else {
-          reject(err)
+          reject(err);
         }
-      })
+      });
     }
-  })
-}
+  });
+};
 
 const computedSpan = (field) => {
   // 如果schema没有column属性，或者column属性值为0时，则使用filed的span值
-  const useSpan = !Object.hasOwn(schema, 'column') || schema.column === 0
-  return useSpan ? field.span || 24 : 24 / schema.column
-}
+  const useSpan = !Object.hasOwn(schema, 'column') || schema.column === 0;
+  return useSpan ? field.span || 24 : 24 / schema.column;
+};
 
 const reset = (fieldlist) => {
   // eslint-disable-next-line no-unused-expressions
-  formInstance.value && formInstance.value.resetFields(fieldlist)
-}
+  formInstance.value && formInstance.value.resetFields(fieldlist);
+};
 
 const haveSolt = (schema) => {
-  if (!slots) return false
-  return schema.field in slots
-}
+  if (!slots) return false;
+  return schema.field in slots;
+};
 
 // feat: schema 新增show字段方便更加灵活控制表单项的渲染
 const shouldDisplay = (schema) => {
   if (Object.prototype.hasOwnProperty.call(schema, 'show')) {
-    return schema.show
+    return schema.show;
   }
-  return true
-}
+  return true;
+};
 defineExpose({
   validate,
   reset,
-})
+});
 </script>
 
 <script>
 export default {
   name: 'FormRender4Vue3Pro',
-}
+};
 </script>
+
+<style scoped>
+.form-render {
+  width: 100%;
+}
+.submit_group_btn {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+</style>

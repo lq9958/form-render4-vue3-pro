@@ -1,43 +1,55 @@
 <template>
   <a-radio-group v-model="formData[filedName]" v-bind="attrs">
     <a-radio
-      v-for="item in options"
-      :key="getKey(item)"
-      :value="getValue(item)"
-      :label="getLabel(item)"
-      >{{ getLabel(item) }}</a-radio
+      v-for="(item, index) in options"
+      :key="index"
+      :value="item[optionValue]"
+      :label="item[optionLabel]"
     >
+      {{ item[optionLabel] }}
+    </a-radio>
   </a-radio-group>
 </template>
 
 <script setup>
-import { inject, ref, onMounted, reactive, watch } from 'vue'
-import useOptionData from '../hooks'
+import { inject, ref, reactive, watch } from 'vue';
+import useOptionData from '../hooks';
+import { getEventBus } from '../../utils/eventemitter';
+import { composeWatcher } from '../../utils/watcher';
 
+const emitter = getEventBus();
 const props = defineProps({
   schema: Object,
-})
-const schema = reactive(props.schema)
+});
+const schema = reactive(props.schema);
+const formData = inject('form-render-data');
+const attrs = schema.props || {};
 
-const { optionData, getOptions, options, getKey, getLabel, getValue } =
-  useOptionData(schema)
-const formData = inject('form-render-data')
+const {
+  optionData,
+  setOptions,
+  options,
+  optionLabel,
+  optionValue,
+  globalSchema,
+} = useOptionData(schema);
 
-const filedName = ref(schema.field)
+const filedName = ref(schema.field);
 
-onMounted(() => {
-  getOptions()
-})
-
+setOptions();
+emitter.on(`${filedName.value}`, () => {
+  formData[filedName.value] = '';
+  setOptions();
+});
 watch(optionData, () => {
-  getOptions()
-})
+  setOptions();
+});
 
-const attrs = schema.props || {}
+composeWatcher(filedName.value, schema.watcher, globalSchema, formData);
 </script>
 
 <script>
 export default {
   name: 'FormRenderRadio',
-}
+};
 </script>

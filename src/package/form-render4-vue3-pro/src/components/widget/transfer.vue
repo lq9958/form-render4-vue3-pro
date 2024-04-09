@@ -10,32 +10,39 @@
 </template>
 
 <script setup>
-import { inject, reactive, watch, onMounted } from 'vue'
-import useOptionData from '../hooks'
+import { inject, ref, reactive, watch } from 'vue';
+import useOptionData from '../hooks';
+import { getEventBus } from '../../utils/eventemitter';
+import { composeWatcher } from '../../utils/watcher';
 
+const emitter = getEventBus();
 // 获取options
 const props = defineProps({
   schema: Object,
-})
-const schema = reactive(props.schema)
+});
+const schema = reactive(props.schema);
 
-const formData = inject('form-render-data')
-const { optionData, getOptions, options } = useOptionData(schema)
+const formData = inject('form-render-data');
+const { optionData, setOptions, options, globalSchema } = useOptionData(schema);
 
-const filedName = schema.field
-const attrs = schema.props || {}
+const filedName = ref(schema.field);
+const attrs = schema.props || {};
 
-onMounted(() => {
-  getOptions()
-})
+setOptions();
+emitter.on(`${filedName.value}`, () => {
+  formData[filedName.value] = '';
+  setOptions();
+});
 
 watch(optionData, () => {
-  getOptions()
-})
+  setOptions();
+});
+
+composeWatcher(filedName.value, schema.watcher, globalSchema, formData);
 </script>
 
 <script>
 export default {
   name: 'FormRenderTransfer',
-}
+};
 </script>
