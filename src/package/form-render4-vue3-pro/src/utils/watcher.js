@@ -91,9 +91,21 @@ const composeConditionStr = (watcher) => {
   let condition = ''
   const trigger = watcher.triggerType
   trigger.expression.forEach((expression, index) => {
+    let code = ''
+    switch (expression) {
+      case 'include':
+        code = `newVal.includes(${expression.conditionValue})`
+        break
+      case 'notinclude':
+        code = `!newVal.includes(${expression.conditionValue})`
+        break
+      default:
+        code = `newVal ${expression.expression} ${expression.conditionValue}`
+        break
+    }
     condition += index == trigger.expression.length - 1
-      ? `newVal ${expression.expression} ${expression.conditionValue}`
-      : `newVal ${expression.expression} ${expression.conditionValue} &&`
+      ? code
+      : `${code} &&`
   })
 
   trigger.regExp.forEach((regexp, index) => {
@@ -137,7 +149,7 @@ const composeWatcher = (field, watcher, schema, formdata) => {
   if (!watcher?.length) return
   watcher.forEach(item => {
     const condition = composeConditionStr(item)
-    watch(() => formdata[field], (newVal) => {
+    watch(() => formdata[field], (newVal, oldVal) => {
       if (eval(condition)) {
         // hidden
         toggleFieldDisplayStatus(item.event.hidden, schema.fields, false)

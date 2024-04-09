@@ -10,40 +10,35 @@
 </template>
 
 <script setup>
-import { inject, ref, reactive, watch } from 'vue'
-import useOptionData from '../hooks'
-import { getEventBus } from '../../utils/eventemitter'
-import { composeWatcher } from '../../utils/watcher'
+import { inject, ref, reactive } from 'vue';
+import useOptionData from '../hooks';
+import { getEventBus } from '../../utils/eventemitter';
+import { composeWatcher } from '../../utils/watcher';
 
-const emitter = getEventBus()
+const emitter = getEventBus();
 const props = defineProps({
   schema: Object,
-})
-const schema = reactive(props.schema)
-const attrs = schema.props || {}
+});
+const schema = reactive(props.schema);
+const attrs = schema.props || {};
 
-const formData = inject('form-render-data')
-const {
-  optionData,
-  setOptions,
-  options,
-  optionLabel,
-  optionValue,
-  globalSchema,
-} = useOptionData(schema)
+const formData = inject('form-render-data');
+const { setOptions, options, optionLabel, optionValue, globalSchema } =
+  useOptionData(schema);
 
-const filedName = ref(schema.field)
+const filedName = ref(schema.field);
+setOptions();
 
-setOptions()
-watch(optionData, () => {
-  setOptions()
-})
+emitter.on(`${filedName.value}`, () => {
+  formData[filedName.value] = '';
+  setOptions();
+});
 
-composeWatcher(filedName.value, schema.watcher, globalSchema, formData)
+composeWatcher(filedName.value, schema.watcher, globalSchema, formData);
 </script>
 
 <script>
 export default {
   name: 'FormRenderSelect',
-}
+};
 </script>
