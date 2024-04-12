@@ -7,6 +7,7 @@
   />
   <!-- 表单项 -->
   <a-form-item
+    class="11"
     :field="schema.field"
     :label="schema.title"
     v-bind="schema.config || {}"
@@ -14,16 +15,14 @@
   >
     <div v-if="isFormItem">
       <a-row :gutter="gutter">
-        <a-col
-          v-for="child in children"
-          :key="child.field"
-          :span="getSpan(child)"
-        >
-          <form-render-item :schema="child"></form-render-item>
-        </a-col>
+        <template v-for="child in children" :key="child.field">
+          <a-col v-if="isShowFormItem(child)" :span="getSpan(child)">
+            <form-render-item :schema="child" />
+          </a-col>
+        </template>
       </a-row>
     </div>
-    <component v-else :is="componentMap[type]" :schema="schema" />
+    <component :is="componentMap[type]" :schema="schema" />
   </a-form-item>
 </template>
 
@@ -99,8 +98,8 @@ const getSpan = (child) => {
         `[Form-Render4-Vue3-Pro]: field '${
           child.field
         }' attribute 'span' value type must be number, but get a ${is(
-          child.span
-        )}.`
+          child.span,
+        )}.`,
       )
     }
   }

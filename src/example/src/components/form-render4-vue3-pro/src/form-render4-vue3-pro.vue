@@ -2,24 +2,24 @@
   <div class="form-render">
     <a-form ref="formInstance" :model="formData" v-bind="formProps">
       <a-row :gutter="gutter">
-        <a-col
-          v-for="field in fields"
-          :key="field.field"
-          :span="computedSpan(field)"
-        >
-          <template v-if="shouldDisplay(field)">
-            <div v-if="haveSolt(field)" class="form-render-item">
-              <a-form-item
-                :field="field.field"
-                :label="field.title"
-                v-bind="field.config || {}"
-              >
-                <slot :name="field.field" :data="formData"> </slot>
-              </a-form-item>
-            </div>
-            <form-render-item v-else :schema="field" :form-data="formData" />
-          </template>
-        </a-col>
+        <template v-for="field in fields" :key="field.field">
+          <a-col
+            :span="computedSpan(field)"
+            v-if="shouldDisplay(field)"
+          >
+              <div v-if="haveSolt(field)" class="form-render-item">
+                <a-form-item
+                  :field="field.field"
+                  :label="field.title"
+                  v-bind="field.config || {}"
+                >
+                  <slot :name="field.field" :data="formData"> </slot>
+                </a-form-item>
+              </div>
+              <form-render-item v-else :schema="field" />
+          </a-col>
+        </template>
+
         <a-col :span="24 / column">
           <a-form-item no-style>
             <div class="submit_group_btn" v-if="haveSolt({ field: 'footer' })">
@@ -111,6 +111,7 @@ const shouldDisplay = (schema) => {
   }
   return true;
 };
+
 defineExpose({
   validate,
   reset,

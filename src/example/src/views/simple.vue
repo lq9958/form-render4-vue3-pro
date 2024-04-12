@@ -97,10 +97,10 @@ const validateForm = async () => {
 }
 
 const staticData = [
-  {
-    value: 'song',
-    label: '唱',
-  },
+  // {
+  //   value: 'song',
+  //   label: '唱',
+  // },
   {
     value: 'dance',
     label: '跳',
@@ -176,7 +176,24 @@ const optionData = reactive({
     ],
   },
   checkbox: {
-    list: staticData,
+    list: [
+      {
+        value: 'song',
+        label: '唱',
+      },
+      {
+        value: 'dance',
+        label: '跳',
+      },
+      {
+        value: 'rap',
+        label: 'rap',
+      },
+      {
+        value: 'basketball',
+        label: '篮球',
+      },
+    ],
   },
   cascader: {
     list: [
@@ -263,6 +280,18 @@ const optionData = reactive({
   },
 })
 
+const changeData = () => {
+  optionData.checkbox.list = [
+    {
+      value: 'song',
+      label: '唱',
+    },
+    {
+      value: 'dance',
+      label: '跳',
+    },
+  ]
+}
 const resetFormData = () => {
   formRenderInstance.value && formRenderInstance.value.reset()
 }
@@ -297,7 +326,13 @@ const showFormItem = ref(false)
     flex: 1;
     height: 100%;
     background-color: #282c34;
-    font-family: Fira code, Fira Mono, Consolas, Menlo, Courier, monospace;
+    font-family:
+      Fira code,
+      Fira Mono,
+      Consolas,
+      Menlo,
+      Courier,
+      monospace;
     font-size: 1rem;
     line-height: 1.5;
   }
