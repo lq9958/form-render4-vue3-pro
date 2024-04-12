@@ -69,7 +69,7 @@ export default (schema) => {
       options.value = optionData[schema.field].list || []
       return
     }
-    if (datasource.type == 'remote') {
+    if (datasource.type === 'remote') {
       datasource.params.forEach((param) => {
         const reg = /^\${(.*)}$/
         if (param.value) {
@@ -85,8 +85,7 @@ export default (schema) => {
         datasource.params,
         datasource.dataPath
       )
-      console.log(options.value);
-    } else if (datasource.type == "provide") {
+    } else if (datasource.type === "provide") {
       options.value = datasource.data || []
     } else {
       options.value = optionData[schema.field].list || []
