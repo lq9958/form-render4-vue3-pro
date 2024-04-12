@@ -9,14 +9,6 @@
 ## [💎 更新日志](./CHANGELOG.MD)
 
 ## 🌈 如何使用
-
-### V3.x 版本现已发布，支持加载远程数据源，支持自定义数据源
-
-```
-npm install form-render4-vue3-pro@next --save
-```
-
-
 ### 安装
 
 ```
@@ -102,7 +94,7 @@ const schema = reactive({
 
 ## API
 
-### <from-render4-vue3> Props
+### Props
 
 | 参数名              | 类型   | 描述                                                                         | 是否必须 |
 | ------------------- | ------ | ---------------------------------------------------------------------------- | -------- |
@@ -110,7 +102,7 @@ const schema = reactive({
 | schema              | Object | 生成表单的 JSON 对象                                                         | Yes      |
 | optionData          | Object | `select、checkbox、radio、tree-select、cascader、transfer`等组件选项的数据源 | No       |
 
-### <from-render4-vue3> Methods
+### Methods
 
 | 方法名        | 描述                 | 参数       | 返回值  |
 | ------------- | -------------------- | ---------- | ------- |
@@ -118,7 +110,7 @@ const schema = reactive({
 | clearValidate | 清除校验表单校验数据 | -          | -       |
 | reset         | 重置表单字段         | -/string[] | void    |
 
-### <form-render4-vue3> Slots
+### Slots
 
 | 插槽名 | 描述 | 参数 |     |
 | ------ | ---- | ---- | --- |
@@ -136,39 +128,42 @@ const schema = reactive({
 
 ### fields 字段描述
 
-| 字段名称 | 类型    | Description                                                                                            | 是否必须 |
-| -------- | ------- | ------------------------------------------------------------------------------------------------------ | -------- |
-| type     | String  | 指定生成对应 arco-design 的组件，对应关系见下表 type                                                   | Yes      |
-| gutter   | Number  | 用与表单项之间的间隔 ，该项不设置会自动取全局的 gutter                                                 | No       |
-| title    | String  | 表单项的名称                                                                                           | Yes      |
-| field    | String  | 表单项绑定的字段                                                                                       | Yes      |
-| value    | any     | 该表表单项的值                                                                                         | No       |
-| props    | Object  | 生成最终组件的 props 项，对应 arco-design 组件的 props                                                 | No       |
-| span     | Number  | 该表单项独占的栅格数（默认为 24）                                                                      | No       |
-| show     | Boolean | 控制表单项显示与否，默认为：true                                                                       | No       |
-| config   | Object  | `a-form-item`组件配置对象，字段参考[`a-form-item`](https://arco.design/vue/component/form#API)组件属性 | No       |
-| children | Array   | 嵌套表单项                                                                                             | No       |
+| 字段名称       | 类型          | Description                                                                             | 是否必须 |
+|------------|-------------|-----------------------------------------------------------------------------------------| -------- |
+| datasource | DataSource  | 远程加载数据配置                                                                                | Yes      |
+| type       | String      | 指定生成对应 arco-design 的组件，对应关系见下表 type                                                     | Yes      |
+| gutter     | Number      | 用与表单项之间的间隔 ，该项不设置会自动取全局的 gutter                                                         | No       |
+| title      | String      | 表单项的名称                                                                                  | Yes      |
+| field      | String      | 表单项绑定的字段                                                                                | Yes      |
+| value      | any         | 该表表单项的值                                                                                 | No       |
+| props      | Object      | 生成最终组件的 props 项，对应 arco-design 组件的 props                                                | No       |
+| span       | Number      | 该表单项独占的栅格数（默认为 24）                                                                      | No       |
+| show       | Boolean     | 控制表单项显示与否，默认为：true                                                                      | No       |
+| config     | Object      | `a-form-item`组件配置对象，字段参考[`a-form-item`](https://arco.design/vue/component/form#API)组件属性 | No       |
+| children   | Array       | 嵌套表单项                                                                                   | No       |
+| watcher    | Array       | 字段联动动作                                                                                  | No       |
 
 ## 当前支持的组件
 
-| type              | 对应的 arco-design 组件名        |
-| ----------------- | -------------------------------- |
-| form-item         | 表单项，复杂表单布局可能会使用到 |
-| input             | a-input                          |
-| input-number      | a-input-number                   |
-| checkbox          | a-checkbox                       |
-| radio             | a-radio                          |
-| switch            | a-switch                         |
-| slider            | a-slider                         |
-| textarea          | a-textarea                       |
-| rate              | a-rate                           |
-| upload            | a-upload                         |
-| time-picker       | a-time-picker                    |
-| verification-code | a-verification-code              |
-| tree-select       | a-tree-select                    |
-| date-range-picker | a-date-range-picker              |
-| date-picker       | a-date-picker                    |
-| cascader          | a-cascader                       |
-| transfer          | a-transfer                       |
-| divider           | a-divider                        |
-| alert             | a-alert                          |
+| type              | 对应的 arco-design 组件名 |
+|-------------------|---------------------|
+| form-item         | 表单项，复杂表单布局可能会使用到    |
+| input             | a-input             |
+| input-number      | a-input-number      |
+| checkbox          | a-checkbox          |
+| radio             | a-radio             |
+| switch            | a-switch            |
+| slider            | a-slider            |
+| textarea          | a-textarea          |
+| rate              | a-rate              |
+| upload            | a-upload            |
+| time-picker       | a-time-picker       |
+| verification-code | a-verification-code |
+| tree-select       | a-tree-select       |
+| date-range-picker | a-date-range-picker |
+| date-picker       | a-date-picker       |
+| cascader          | a-cascader          |
+| transfer          | a-transfer          |
+| divider           | a-divider           |
+| alert             | a-alert             |
+| color             | a-color             |
