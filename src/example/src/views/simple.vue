@@ -1,5 +1,6 @@
 <template>
   <div class="simple-form">
+    <a-button type="primary" @click="handleChangeData">test</a-button>
     <div class="form-container">
       <form-render4-vue3-pro
         v-if="showForm"
@@ -280,8 +281,28 @@ const optionData = reactive({
   },
 })
 
-const changeData = () => {
+const handleChangeData = () => {
   optionData.checkbox.list = [
+    {
+      value: 'song',
+      label: '唱',
+    },
+    {
+      value: 'dance',
+      label: '跳',
+    },
+  ]
+  optionData.like2.list = [
+    {
+      value: 'song',
+      label: '唱',
+    },
+    {
+      value: 'dance',
+      label: '跳',
+    },
+  ]
+  optionData.like.list = [
     {
       value: 'song',
       label: '唱',
