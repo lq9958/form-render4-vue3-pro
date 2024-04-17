@@ -1,6 +1,11 @@
 <template>
   <div class="form-render">
-    <a-form ref="formInstance" :model="formData" v-bind="formProps">
+    <a-form
+      ref="formInstance"
+      :model="formData"
+      v-bind="formProps"
+      :style="schema.props.layout === 'inline' ? { display: 'block' } : {}"
+    >
       <a-row :gutter="gutter">
         <template v-for="field in fields" :key="field.field">
           <a-col :span="computedSpan(field)" v-if="shouldDisplay(field)">
@@ -120,7 +125,5 @@ export default {
 }
 .submit_group_btn {
   width: 100%;
-  display: flex;
-  justify-content: flex-end;
 }
 </style>

@@ -7,7 +7,6 @@
   />
   <!-- 表单项 -->
   <a-form-item
-    class="11"
     :field="schema.field"
     :label="schema.title"
     v-bind="schema.config || {}"
