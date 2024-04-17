@@ -1,6 +1,5 @@
 <template>
   <div class="simple-form">
-    <a-button type="primary" @click="handleChangeData">test</a-button>
     <div class="form-container">
       <form-render4-vue3-pro
         v-if="showForm"
