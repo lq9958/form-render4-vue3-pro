@@ -22,7 +22,7 @@ import FormRender4Vue3 from 'form-render4-vue3-pro'
 import App from './App.vue'
 
 const app = createApp(App)
-app.use(FormRender4Vue3)
+app.use(FormRender4Vue3,{ warning:false }) // 安装组件时可选择警告信息打印与否 
 app.mount('#app')
 ```
 
