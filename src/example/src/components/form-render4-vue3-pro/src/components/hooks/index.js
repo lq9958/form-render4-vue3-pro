@@ -1,11 +1,16 @@
-import { inject, computed, ref, reactive } from 'vue'
+import { inject, computed, ref, getCurrentInstance } from 'vue'
 import { requestData } from '../../utils/request'
 
 /**
  * @since v3.0.0 新增远程数据源，组件会根据schema中数据来源类型来决定获取数据的方式
  */
 
-export default (schema) => {
+export default (schema, warn = true) => {
+  const globalProperties =
+    getCurrentInstance().appContext.config.globalProperties
+
+  const printWarningMessage = globalProperties.$formRender4vue3Option.warning
+
   const optionData = inject('form-render-option-data')
   // 全局schema
   const globalSchema = inject('form-render-schema')
@@ -14,35 +19,35 @@ export default (schema) => {
 
   const options = ref([])
 
-  const getOptionField = (fieldName) => {
-    if (!Object.hasOwn(schema, 'datasource')) {
-      if (!optionData[schema.field][fieldName]) {
-        console.warn(
-          `[Form-Render4-Vue3-Pro ${schema.field}]: have no provide a ${fieldName} option field, default use '${fieldName}'.`,
-        )
-      }
-      return optionData[schema.field][fieldName] || fieldName
-    } else {
-      if (datasource.type === 'remote' || datasource.type === 'provide') {
-        if (!datasource?.options[fieldName]) {
-          console.warn(
-            `[Form-Render4-Vue3-Pro ${schema.field}]: have no provide a ${fieldName} option field, default use '${fieldName}'.`,
-          )
-        }
-        return datasource?.options[fieldName] || fieldName
-      }
-      if (!optionData[schema.field][fieldName]) {
-        console.warn(
-          `[Form-Render4-Vue3-Pro ${schema.field}]: have no provide a ${fieldName} option field, default use '${fieldName}'.`,
-        )
-      }
-      return optionData[schema.field][fieldName] || fieldName
-    }
-  }
+  // const getOptionField = (fieldName) => {
+  //   if (!Object.hasOwn(schema, 'datasource')) {
+  //     if (printWarningMessage && !optionData[schema.field][fieldName]) {
+  //       console.warn(
+  //         `[Form-Render4-Vue3-Pro ${schema.field}]: have no provide a ${fieldName} option field, default use '${fieldName}'.`,
+  //       )
+  //     }
+  //     return optionData[schema.field][fieldName] || fieldName
+  //   } else {
+  //     if (datasource.type === 'remote' || datasource.type === 'provide') {
+  //       if (printWarningMessage && !datasource?.options[fieldName]) {
+  //         console.warn(
+  //           `[Form-Render4-Vue3-Pro ${schema.field}]: have no provide a ${fieldName} option field, default use '${fieldName}'.`,
+  //         )
+  //       }
+  //       return datasource?.options[fieldName] || fieldName
+  //     }
+  //     if (printWarningMessage && !optionData[schema.field][fieldName]) {
+  //       console.warn(
+  //         `[Form-Render4-Vue3-Pro ${schema.field}]: have no provide a ${fieldName} option field, default use '${fieldName}'.`,
+  //       )
+  //     }
+  //     return optionData[schema.field][fieldName] || fieldName
+  //   }
+  // }
 
   const optionLabel = computed(() => {
     if (!Object.hasOwn(schema, 'datasource')) {
-      if (!optionData[schema.field].label) {
+      if (printWarningMessage && !optionData[schema.field].label) {
         console.warn(
           `[Form-Render4-Vue3-Pro ${schema.field}]: have no provide a label option field, default use 'label'.`,
         )
@@ -50,14 +55,14 @@ export default (schema) => {
       return optionData[schema.field].label || 'label'
     } else {
       if (datasource.type === 'remote' || datasource.type === 'provide') {
-        if (!datasource?.options?.label) {
+        if (printWarningMessage && !datasource?.options?.label) {
           console.warn(
             `[Form-Render4-Vue3-Pro ${schema.field}]: have no provide a label option field, default use 'label'.`,
           )
         }
         return datasource?.options?.label || 'label'
       }
-      if (!optionData[schema.field].label) {
+      if (printWarningMessage && !optionData[schema.field].label) {
         console.warn(
           `[Form-Render4-Vue3-Pro ${schema.field}]: have no provide a label option field, default use 'label'.`,
         )
@@ -68,7 +73,7 @@ export default (schema) => {
 
   const optionValue = computed(() => {
     if (!Object.hasOwn(schema, 'datasource')) {
-      if (!optionData[schema.field].value) {
+      if (printWarningMessage && !optionData[schema.field].value) {
         console.warn(
           `[Form-Render4-Vue3-Pro ${schema.field}]: have no provide a value option field, default use 'value'.`,
         )
@@ -76,14 +81,14 @@ export default (schema) => {
       return optionData[schema.field].value || 'value'
     } else {
       if (datasource.type === 'remote' || datasource.type === 'provide') {
-        if (datasource?.options?.value) {
+        if (printWarningMessage && datasource?.options?.value) {
           console.warn(
             `[Form-Render4-Vue3-Pro ${schema.field}]: have no provide a value option field, default use 'value'.`,
           )
         }
         return datasource?.options?.value || 'value'
       }
-      if (optionData[schema.field].value) {
+      if (printWarningMessage && optionData[schema.field].value) {
         console.warn(
           `[Form-Render4-Vue3-Pro ${schema.field}]: have no provide a value option field, default use 'value'.`,
         )
@@ -129,7 +134,7 @@ export default (schema) => {
     optionData,
     optionLabel,
     optionValue,
-    getOptionField,
+    // getOptionField,
     setOptions,
     options,
   }
