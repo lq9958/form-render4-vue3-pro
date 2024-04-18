@@ -44,7 +44,7 @@ const props = defineProps({
   schema: { type: Object },
   optionData: { type: Object },
 })
-
+console.log(props)
 const formData = reactive(props.modelValue)
 const schema = reactive(props.schema)
 watch(formData, (val) => {
