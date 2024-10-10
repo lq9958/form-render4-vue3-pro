@@ -9,7 +9,7 @@
         :on-change="handleFormDataChange"
       >
         <template #footer>
-          <a-buton type="primary">校验 </a-buton>
+          <a-button type="primary">校验 </a-button>
         </template>
       </form-render4-vue3>
       <el-text v-else class="mx-1" type="danger">JSON 格式有误</el-text>

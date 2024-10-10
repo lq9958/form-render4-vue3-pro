@@ -51,6 +51,7 @@ import FormRenderAlert from './widget/alert.vue'
 import FormRenderColorPicker from './widget/color-picker.vue'
 
 import { is } from '../utils/index.js'
+
 // 不需要使用a-form-item包裹的组件列表
 const noWrapper = ['divider', 'alert']
 const componentMap = {

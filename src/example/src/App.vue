@@ -2,8 +2,11 @@
   <div class="app-content">
     <div class="app-title">Form-Render4-Vue3-Pro</div>
     <a-tabs v-model="activeName">
-      <a-tab-pane title="普通表单" key="simple">
+      <a-tab-pane title="arco-design" key="simple">
         <simple-form></simple-form>
+      </a-tab-pane>
+      <a-tab-pane title="element-plus" key="simple-ele">
+        <simple-form-ele></simple-form-ele>
       </a-tab-pane>
     </a-tabs>
   </div>
@@ -12,8 +15,9 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import SimpleForm from '@/views/simple.vue'
+import SimpleFormEle from '@/views/simple-ele.vue'
 
-const activeName = ref('simple')
+const activeName = ref('simple-ele')
 </script>
 
 <style scoped lang="scss">

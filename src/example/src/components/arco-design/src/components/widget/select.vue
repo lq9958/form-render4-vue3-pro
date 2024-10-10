@@ -24,8 +24,8 @@ const attrs = schema.props || {}
 
 const formData = inject('form-render-data')
 const {
-  setOptions,
   optionData,
+  setOptions,
   options,
   optionLabel,
   optionValue,

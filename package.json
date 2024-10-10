@@ -1,9 +1,9 @@
 {
   "name": "form-render4-vue3-pro",
   "author": "lq9958",
-  "version": "3.0.7",
-  "description": "A form render for vue3, base on arco-design.",
-  "main": "src/package/form-render4-vue3-pro/index.js",
+  "version": "3.0.8",
+  "description": "A form renderer for vue3",
+  "main": "src/package/element-plus/index.js",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -16,6 +16,7 @@
     "Form Designer",
     "Json Schema",
     "Arco-Design",
+    "Element-Plus",
     "FormRender",
     "Render",
     "Form",
@@ -28,6 +29,7 @@
   "dependencies": {
     "@arco-design/web-vue": "^2.54.6",
     "axios": "^1.6.8",
+    "element-plus": "^2.8.4",
     "mitt": "^3.0.1",
     "vue": "^3.2.47"
   },

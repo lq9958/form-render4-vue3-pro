@@ -1,36 +1,43 @@
 <template>
   <div class="form-render">
-    <a-form
+    <el-form
       ref="formInstance"
       :model="formData"
       v-bind="formProps"
-      :style="schema.props.layout === 'inline' ? { display: 'block' } : {}"
     >
-      <a-row :gutter="gutter">
+      <el-row v-if="formProps.inline" :gutter="gutter">
         <template v-for="field in fields" :key="field.field">
-          <a-col :span="computedSpan(field)" v-if="shouldDisplay(field)">
-            <div v-if="haveSolt(field)" class="form-render-item">
-              <a-form-item
-                :field="field.field"
-                :label="field.title"
-                v-bind="field.config || {}"
-              >
-                <slot :name="field.field" :data="formData"> </slot>
-              </a-form-item>
-            </div>
-            <form-render-item v-else :schema="field" />
-          </a-col>
+          <el-col :span="computedSpan(field)" v-if="shouldDisplay(field)" :style="{'margin-bottom':gutter+'px'}">
+            <form-render-item :style="{width: '100%'}" :schema="field" >
+              <template #[field.field]  v-if="haveSlot(field)" >
+                <slot :name="field.field" />
+              </template>
+            </form-render-item>
+          </el-col>
         </template>
-
-        <a-col :span="24 / column">
-          <a-form-item no-style>
-            <div class="submit_group_btn" v-if="haveSolt({ field: 'footer' })">
+        <el-col :span="24 / column">
+          <el-form-item>
+            <div class="submit_group_btn" v-if="haveSlot({ field: 'footer' })">
+              <slot name="footer" ></slot>
+            </div>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <template v-else>
+          <div v-for="field in fields" :key="field.field">
+            <form-render-item v-if="shouldDisplay(field)" :style="{width: '100%'}" :schema="field" >
+              <template #[field.field] v-if="haveSlot(field)" >
+                <slot :name="field.field" />
+              </template>
+            </form-render-item>
+          </div>
+          <el-form-item v-if="haveSlot({ field: 'footer' })">
+            <div class="submit_group_btn" >
               <slot name="footer"></slot>
             </div>
-          </a-form-item>
-        </a-col>
-      </a-row>
-    </a-form>
+          </el-form-item>
+      </template>
+    </el-form>
   </div>
 </template>
 
@@ -39,12 +46,14 @@ import { watch, ref, provide, reactive, useSlots, computed } from 'vue'
 import FormRenderItem from './components/form-render-item.vue'
 
 const slots = useSlots()
+provide('form-render-slots', slots)
+
 const props = defineProps({
   modelValue: { type: Object },
   schema: { type: Object },
   optionData: { type: Object },
 })
-console.log(props)
+
 const formData = reactive(props.modelValue)
 const schema = reactive(props.schema)
 watch(formData, (val) => {
@@ -58,10 +67,13 @@ const emit = defineEmits(['update:modelValue'])
 const fields = ref(schema.fields)
 const formProps = ref(schema.props)
 // fix: 修复schema无clomun属性时无法渲染表单的问题
-const column = ref(schema.column || 1)
+const column = computed(() => schema.column || 1)
 
-// @since 2.0.0 新增guuter属性，用于控制表单栅栏间隔
-const gutter = ref(schema.gutter || 8)
+/**
+ * @since 2.0.0 新增guuter属性，用于控制表单栅栏间隔
+ */
+const gutter = computed(() => schema.gutter || 8)
+
 watch(
   () => props.schema,
   (newVal) => {
@@ -86,17 +98,22 @@ const validate = () => {
 }
 
 const computedSpan = (field) => {
-  // 如果schema没有column属性，或者column属性值为0时，则使用filed的span值
-  const useSpan = !Object.hasOwn(schema, 'column') || schema.column === 0
-  return useSpan ? field.span || 24 : 24 / schema.column
+  // 优先使用formItem的span值
+  if(field.span) {
+    return field.span
+  }else if(Object.hasOwn(schema, 'column')) {
+   return  24 / schema.column
+  }
+  return 24
+
 }
 
-const reset = (fieldlist) => {
+const reset = (fieldList) => {
   // eslint-disable-next-line no-unused-expressions
-  formInstance.value && formInstance.value.resetFields(fieldlist)
+  formInstance.value && formInstance.value.resetFields(fieldList)
 }
 
-const haveSolt = (schema) => {
+const haveSlot = (schema) => {
   if (!slots) return false
   return schema.field in slots
 }

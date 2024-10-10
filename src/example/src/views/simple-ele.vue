@@ -1,7 +1,7 @@
 <template>
   <div class="simple-form">
     <div class="form-container">
-      <form-render4-vue3
+      <form-render4-vue3-pro
         v-if="showForm"
         ref="formRenderInstance"
         v-model="formData"
@@ -9,36 +9,42 @@
         :option-data="optionData"
       >
         <template #slot>
-          <a-image
-            width="200"
+          <el-image
+            style="width:200px"
             src="https://p1-arco.byteimg.com/tos-cn-i-uwbnlip3yd/a8c8cdb109cb051163646151a4a5083b.png~tplv-uwbnlip3yd-webp.webp"
           />
         </template>
-        <template #footer>
-          <a-space>
-            <a-button type="primary" @click="validateForm">校验</a-button>
-            <a-button @click="resetFormData">重置</a-button>
-          </a-space>
+        <template #file>
+          <el-upload></el-upload>
         </template>
-      </form-render4-vue3>
-      <a-link v-else status="danger">json 格式不正确~</a-link>
-      <a-divider />
+        <template #name>
+          <el-input v-model="formData.name" placeholder="输入姓名"/>
+        </template>
+        <template #footer>
+          <el-space>
+            <el-button type="primary" @click="validateForm">校验</el-button>
+            <el-button @click="resetFormData">重置</el-button>
+          </el-space>
+        </template>
+      </form-render4-vue3-pro>
+      <el-link v-else status="danger">json 格式不正确~</el-link>
+      <el-divider />
       <div>
-        <a-space>
-          隐藏表单项：<a-switch
+        <el-space>
+          隐藏表单项：<el-switch
             v-model="showFormItem"
             @change="changeFormItemDisplayState"
-          ></a-switch>
-        </a-space>
+          ></el-switch>
+        </el-space>
       </div>
-      <a-space align="center">
+      <el-space align="center">
         <div class="form-data">
           表单数据：
           <pre>
-           <div>{{ JSON.stringify(formData, null, 2) }}</div>
+           {{ JSON.stringify(formData, null, 4) }}
           </pre>
         </div>
-      </a-space>
+      </el-space>
     </div>
     <div class="editor-container">
       <codemirror
@@ -60,15 +66,15 @@ import { reactive, ref } from 'vue'
 import { Codemirror } from 'vue-codemirror'
 import { json } from '@codemirror/lang-json'
 import { oneDark } from '@codemirror/theme-one-dark'
-import { SIMPLEFORM, SIMPLEFORMDATA } from '@/data/form-schema'
+import { SIMPLEFORM_ELE, SIMPLEFORMDATA } from '@/data/form-schema'
 import useApp from '@/hooks/useApp'
 
 const { context } = useApp()
-const code = ref(JSON.stringify(SIMPLEFORM, null, 4))
+const code = ref(JSON.stringify(SIMPLEFORM_ELE, null, 4))
 const extensions = [json(), oneDark]
 
 const formData = reactive(SIMPLEFORMDATA)
-let formSchema = reactive(SIMPLEFORM)
+let formSchema = reactive(SIMPLEFORM_ELE)
 
 const showForm = ref(true)
 const timer = ref(null)
