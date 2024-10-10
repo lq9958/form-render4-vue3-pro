@@ -2,7 +2,11 @@
 
 <h1 align="center">Form-Render4-Vue3-Pro</h1>
 
-> form-render4-vue3-pro 是基于 vue3 + arco-design 的表单生成组件，组件包含了日常使用的表单组件，意在解决项目日常开发中表单代码重复书写的问题，提高开发效率。目前该项目还在增加更多的特性。
+> form-render4-vue3-pro 是基于 vue3 的表单生成组件，组件包含了日常使用的表单组件，意在解决项目日常开发中表单代码重复书写的问题，提高开发效率。
+
+> 项目目前支持UI库: 
+>1. element-plus
+>2. arco-design
 
 [在线演示](https://lq9958.github.io/)
 
@@ -18,7 +22,8 @@ npm install form-render4-vue3-pro --save
 ```javascript
 // main.js
 import { createApp } from 'vue'
-import FormRender4Vue3 from 'form-render4-vue3-pro'
+// import FormRender4Vue3 from 'form-render4-vue3-pro/arco-design'
+import FormRender4Vue3 from 'form-render4-vue3-pro/element-plus'
 import App from './App.vue'
 
 const app = createApp(App)
